@@ -12,25 +12,36 @@
       <p>사용자 이름: <span id="userName"></span></p>
       <p>Message: <span id="message"></span></p>
       <p>숫자는 오나? <span id="num"></span></p>
+      <p>배열은 되나? <span id="items"></span></p>
+      <p>영어는 되냐? <span id="eng"></span></p>
     </div>
 
     <script>
       fetch("http://localhost:8080/MyTest/responseTest.jsp")
         .then((response) => {
           const currentTime = response.headers.get("CurrentTime");
-          const userName = response.headers.get("User-Name"); // 헤더 이름 일치
-          const message = response.headers.get("Message"); // 헤더 이름 일치
+          const eng = response.headers.get("Eng");
+          const userName = response.headers.get("User-Name");
+          const message = response.headers.get("Message");
           const num = response.headers.get("Num");
+          const items = response.headers.get("Items");
+
+          // JSON 배열로 변환
+          const itemsArray = JSON.parse(items);
 
           document.getElementById("currentTime").textContent = currentTime;
+          document.getElementById("eng").textContent = eng;
           document.getElementById("userName").textContent = userName;
           document.getElementById("message").textContent = message;
           document.getElementById("num").textContent = num;
+          document.getElementById("items").textContent = itemsArray.join(", ");
 
           console.log(currentTime);
+          console.log(eng);
           console.log(userName);
           console.log(message);
           console.log(num);
+          console.log(itemsArray);
         })
         .catch((error) => console.error("Error:", error));
     </script>
