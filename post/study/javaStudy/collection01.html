@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h2>List&lt;E&gt; 컬렉션 주요 메서드</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>메서드 이름</th>
+          <th>리턴타입</th>
+          <th>기능</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>add(E)</td>
+          <td>boolean</td>
+          <td>리스트의 마지막에 원소 추가</td>
+        </tr>
+        <tr>
+          <td>add(int, index, E)</td>
+          <td>void</td>
+          <td>인덱스 위치에 원소 추가</td>
+        </tr>
+        <tr>
+          <td>addAll(collection < ? Extends E > c</td>
+          <td>boolean</td>
+          <td>컬렉션을 마지막에 추가</td>
+        </tr>
+        <tr>
+          <td>addAll(int index, collection < ? Extends E > c</td>
+          <td>boolean</td>
+          <td>인덱스 위치에 컬렉션 추가</td>
+        </tr>
+        <tr>
+          <td>set(int index, E)</td>
+          <td>E</td>
+          <td>인덱스 위치의 값 변경</td>
+        </tr>
+        <tr>
+          <td>remove(Object o)</td>
+          <td>boolean</td>
+          <td>원소 중 동일한 객체 삭제</td>
+        </tr>
+        <tr>
+          <td>remove(int index)</td>
+          <td>E</td>
+          <td>인덱스 위치의 원소값 삭제</td>
+        </tr>
+        <tr>
+          <td>clear()</td>
+          <td>void</td>
+          <td>전체 원소 삭제</td>
+        </tr>
+        <tr>
+          <td>get(int index)</td>
+          <td>E</td>
+          <td>index 위치의 원소값 리턴</td>
+        </tr>
+        <tr>
+          <td>size()</td>
+          <td>int</td>
+          <td>리스트 객체가 가진 원소의 개수</td>
+        </tr>
+        <tr>
+          <td>isEmpty()</td>
+          <td>boolean</td>
+          <td>리스트의 원소가 없는지 여부</td>
+        </tr>
+        <tr>
+          <td>toArray()</td>
+          <td>Object[]</td>
+          <td>리스트를 Object 배열로 변환</td>
+        </tr>
+        <tr>
+          <td>toArray(T[] t)</td>
+          <td>T[]</td>
+          <td>입력 매개변수로 전달한 타입의 배열로 변환</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Set&lt;E&gt; 컬렉션 주요 메서드</h2>
+    <table border="1">
+      <tr>
+        <th>메서드 이름</th>
+        <th>리턴타입</th>
+        <th>기능</th>
+      </tr>
+      <tr>
+        <td>add(E)</td>
+        <td>boolean</td>
+        <td>리스트에 원소 추가</td>
+      </tr>
+      <tr>
+        <td>
+          addAll(Collection<? Extends E>
+          c)
+        </td>
+        <td>boolean</td>
+        <td>컬렉션을 추가</td>
+      </tr>
+      <tr>
+        <td>remove(Object o)</td>
+        <td>boolean</td>
+        <td>원소 중 동일한 객체 삭제</td>
+      </tr>
+      <tr>
+        <td>clear()</td>
+        <td>void</td>
+        <td>전체 원소 삭제</td>
+      </tr>
+      <tr>
+        <td>size()</td>
+        <td>int</td>
+        <td>리스트 객체가 가진 원소의 개수</td>
+      </tr>
+      <tr>
+        <td>isEmpty()</td>
+        <td>boolean</td>
+        <td>Set 객체가 원소가 없는지 여부</td>
+      </tr>
+      <tr>
+        <td>contains(Object o)</td>
+        <td>boolean</td>
+        <td>매개변수로 입력된 원소의 존재 여부</td>
+      </tr>
+      <tr>
+        <td>iterator()</td>
+        <td>Iterator&lt;E&gt;</td>
+        <td>Set 객체 내의 데이터를 연속하여 꺼내는 Iterator 객체 리턴</td>
+      </tr>
+      <tr>
+        <td>toArray()</td>
+        <td>Object[]</td>
+        <td>리스트를 Object 배열로 변환</td>
+      </tr>
+      <tr>
+        <td>toArray(T[] t)</td>
+        <td>T[]</td>
+        <td>입력 매개변수로 전달한 타입의 배열로 변환</td>
+      </tr>
+    </table>
+
+    <h2>TreeSet&lt;E&gt; 컬렉션</h2>
+    <h3>- Set&lt;E&gt;의 기본 메서드 이외의 검색 관련 메서드</h3>
+
+    <table border="1">
+      <tr>
+        <th>메서드 이름</th>
+        <th>리턴타입</th>
+        <th>기능</th>
+      </tr>
+      <tr>
+        <td>first()</td>
+        <td>E</td>
+        <td>Set 원소들 중에서 가장 작은 원소 값 리턴</td>
+      </tr>
+      <tr>
+        <td>last()</td>
+        <td>E</td>
+        <td>Set 원소들 중에서 가장 큰 원소 값 리턴</td>
+      </tr>
+      <tr>
+        <td>lower(E)</td>
+        <td>E</td>
+        <td>매개변수로 입력된 원소보다 작은 수 중 가장 큰 수</td>
+      </tr>
+      <tr>
+        <td>higher(E)</td>
+        <td>E</td>
+        <td>매개변수로 입력된 원소보다 큰 수 중 가장 작은 수</td>
+      </tr>
+      <tr>
+        <td>floor(E)</td>
+        <td>E</td>
+        <td>매개변수로 입력된 원소보다 작은 수 중 같거나 가장 큰 수</td>
+      </tr>
+      <tr>
+        <td>ceiling(E)</td>
+        <td>E</td>
+        <td>매개변수로 입력된 원소보다 큰 수 중 같거나 가장 작은 수</td>
+      </tr>
+      <tr>
+        <td>pollFirst()</td>
+        <td>E</td>
+        <td>원소들 중에서 가장 작은 원소 값 꺼내어 리턴</td>
+      </tr>
+      <tr>
+        <td>pollLast()</td>
+        <td>E</td>
+        <td>원소들 중에서 가장 큰 원소 값 리턴</td>
+      </tr>
+      <tr>
+        <td>headSet(E)</td>
+        <td>SortedSet&lt;E&gt;</td>
+        <td>
+          매개변수보다 작은 모든 원소들로 구성된 Set 리턴
+          <br />
+          (default: 매개변수 값 제외)
+        </td>
+      </tr>
+      <tr>
+        <td>headSet(E, boolean inclusive)</td>
+        <td>NavigableSet&lt;E&gt;</td>
+        <td>
+          첫 번째 매개변수보다 작은 모든 원소들로 구성된 Set 리턴,
+          <br />
+          두 번째 값에 따라 매개변수 값 포함 여부 결정
+        </td>
+      </tr>
+      <tr>
+        <td>tailSet(E)</td>
+        <td>SortedSet&lt;E&gt;</td>
+        <td>
+          매개변수보다 큰 모든 원소의 집합 Set 리턴
+          <br />
+          (default: 매개변수 포함)
+        </td>
+      </tr>
+      <tr>
+        <td>tailSet(E, boolean inclusive)</td>
+        <td>NavigableSet&lt;E&gt;</td>
+        <td>
+          매개변수보다 큰 모든 원소의 집합 Set 리턴
+          <br />
+          (두 번째 매개변수에 따라 매개변수 포함 여부 결정)
+        </td>
+      </tr>
+      <tr>
+        <td>subSet(E from, E to)</td>
+        <td>SortedSet&lt;E&gt;</td>
+        <td>
+          첫 번째보다 같거나 크고, 두 번째보다 작은 원소의 집합 Set을 리턴
+          <br />
+          (from 포함, to 미포함)
+        </td>
+      </tr>
+      <tr>
+        <td>subSet(E from, boolean inclusive, E to, boolean inclusive)</td>
+        <td>NavigableSet&lt;E&gt;</td>
+        <td>
+          첫 번째보다 크고 세 번째보다 작은 원소의 집합 Set 리턴
+          <br />
+          (두 번째와 네 번째 값에 따라 포함 여부 결정)
+        </td>
+      </tr>
+      <tr>
+        <td>descendingSet()</td>
+        <td>NavigableSet&lt;E&gt;</td>
+        <td>내림차순의 의미가 아님, 현재 정렬 기준의 반대로 변환</td>
+      </tr>
+    </table>
+    <h2>Map&lt;K, V&gt; 컬렉션의 주요 메서드</h2>
+    <table border="1">
+      <tr>
+        <th>메서드 이름</th>
+        <th>리턴타입</th>
+        <th>기능</th>
+      </tr>
+      <tr>
+        <td>put(K, V)</td>
+        <td>V</td>
+        <td>입력 매개변수(키, 값) 을 Map 객체에 추가</td>
+      </tr>
+      <tr>
+        <td>putAll(Map&lt;? extends K, ? extends V&gt; M)</td>
+        <td>void</td>
+        <td>입력 매개변수의 Map 객체를 통째로 추가</td>
+      </tr>
+      <tr>
+        <td>replace(K, V)</td>
+        <td>V</td>
+        <td>
+          Key에 해당하는 값을 value로 변경
+          <br />
+          (old 값을 리턴, 해당 Key가 존재하지 않으면 null 리턴)
+        </td>
+      </tr>
+      <tr>
+        <td>replace(K, V old, V new)</td>
+        <td>boolean</td>
+        <td>Key에 해당하는 V old를 V new로 변경</td>
+      </tr>
+      <tr>
+        <td>get(Object Key)</td>
+        <td>V</td>
+        <td>매개변수의 Key 값에 해당하는 value 리턴</td>
+      </tr>
+      <tr>
+        <td>containsKey(Object key)</td>
+        <td>boolean</td>
+        <td>매개변수의 key 값이 포함되어 있는지 여부</td>
+      </tr>
+      <tr>
+        <td>containsValue(Object value)</td>
+        <td>boolean</td>
+        <td>매개변수의 value 값이 포함되어 있는지 여부</td>
+      </tr>
+      <tr>
+        <td>keySet()</td>
+        <td>Set&lt;K&gt;</td>
+        <td>Map 데이터들 중에서 key만 뽑아서 Set 객체로 리턴</td>
+      </tr>
+      <tr>
+        <td>entrySet()</td>
+        <td>Set&lt;Entry&lt;K,V&gt;&gt;</td>
+        <td>Map의 각 Entry를 Set 객체로 담아 리턴</td>
+      </tr>
+      <tr>
+        <td>size()</td>
+        <td>int</td>
+        <td>Map에 포함된 데이터(Entry) 갯수</td>
+      </tr>
+      <tr>
+        <td>remove(Object key)</td>
+        <td>V</td>
+        <td>
+          입력 매개변수의 key를 갖는 엔트리 삭제
+          <br />
+          (단, key가 없으면 아무 동작 안함)
+        </td>
+      </tr>
+      <tr>
+        <td>remove(Object key, Object value)</td>
+        <td>boolean</td>
+        <td>
+          입력 매개변수의 (key, value)를 갖는 엔트리를 삭제
+          <br />
+          (엔트리가 없으면 아무 동작 안함)
+        </td>
+      </tr>
+      <tr>
+        <td>clear()</td>
+        <td>void</td>
+        <td>Map 객체 내의 모든 데이터를 삭제</td>
+      </tr>
+    </table>
+    <h2>TreeMap&lt;K, V&gt; 의 주요 메서드</h2>
+    <table border="1">
+      <tr>
+        <th>메서드 이름</th>
+        <th>리턴타입</th>
+        <th>기능</th>
+      </tr>
+      <tr>
+        <td>firstKey()</td>
+        <td>K</td>
+        <td>TreeMap에서 가장 작은 Key를 리턴</td>
+      </tr>
+      <tr>
+        <td>firstEntry()</td>
+        <td>Map.Entry&lt;K, V&gt;</td>
+        <td>TreeMap에서 가장 작은 Key에 해당하는 Entry 리턴</td>
+      </tr>
+      <tr>
+        <td>lastKey()</td>
+        <td>K</td>
+        <td>TreeMap에서 가장 큰 Key를 리턴</td>
+      </tr>
+      <tr>
+        <td>lastEntry()</td>
+        <td>Map.Entry&lt;K, V&gt;</td>
+        <td>TreeMap에서 가장 큰 Key에 해당하는 Entry 리턴</td>
+      </tr>
+      <tr>
+        <td>lowerKey(K)</td>
+        <td>K</td>
+        <td>지정된 Key보다 작은 Key 중에서 가장 큰 Key 리턴</td>
+      </tr>
+      <tr>
+        <td>lowerEntry(K)</td>
+        <td>Map.Entry&lt;K, V&gt;</td>
+        <td>
+          지정된 Key보다 작은 Key 중에서 가장 큰 Key에 해당하는 Entry 리턴
+        </td>
+      </tr>
+      <tr>
+        <td>higherKey(K)</td>
+        <td>K</td>
+        <td>지정된 Key보다 큰 Key 중에서 가장 작은 Key 리턴</td>
+      </tr>
+      <tr>
+        <td>higherEntry(K)</td>
+        <td>Map.Entry&lt;K, V&gt;</td>
+        <td>
+          지정된 Key보다 큰 Key 중에서 가장 작은 Key에 해당하는 Entry 리턴
+        </td>
+      </tr>
+      <tr>
+        <td>pollFirstEntry()</td>
+        <td>Map.Entry&lt;K, V&gt;</td>
+        <td>가장 작은 Key에 해당하는 Entry를 제거하고 리턴</td>
+      </tr>
+      <tr>
+        <td>pollLastEntry()</td>
+        <td>Map.Entry&lt;K, V&gt;</td>
+        <td>가장 큰 Key에 해당하는 Entry를 제거하고 리턴</td>
+      </tr>
+      <tr>
+        <td>headMap(K)</td>
+        <td>SortedMap&lt;K, V&gt;</td>
+        <td>
+          Key보다 작은 key 값을 가지는 모든 엔트리를 포함한 Map 리턴
+          <br />
+          (default: 매개변수 미포함)
+        </td>
+      </tr>
+      <tr>
+        <td>headMap(K, boolean inclusive)</td>
+        <td>NavigableMap&lt;K, V&gt;</td>
+        <td>
+          Key보다 작은 key 값을 가지는 모든 엔트리를 포함한 Map 리턴
+          <br />
+          (매개변수 포함 여부를 플래그로 설정)
+        </td>
+      </tr>
+      <tr>
+        <td>tailMap(K)</td>
+        <td>SortedMap&lt;K, V&gt;</td>
+        <td>
+          Key보다 큰 key 값을 가지는 모든 엔트리를 포함한 Map 리턴
+          <br />
+          (default: 매개변수 미포함)
+        </td>
+      </tr>
+      <tr>
+        <td>tailMap(K, boolean inclusive)</td>
+        <td>NavigableMap&lt;K, V&gt;</td>
+        <td>
+          Key보다 큰 key 값을 가지는 모든 엔트리를 포함한 Map 리턴
+          <br />
+          (매개변수 포함 여부를 플래그로 설정)
+        </td>
+      </tr>
+      <tr>
+        <td>subMap(K from, K to)</td>
+        <td>SortedMap&lt;K, V&gt;</td>
+        <td>from 이상 to 미만의 엔트리로 구성된 Map 리턴</td>
+      </tr>
+      <tr>
+        <td>subMap(K from, boolean if, K to, boolean if)</td>
+        <td>NavigableMap&lt;K, V&gt;</td>
+        <td>from 이상 to 미만의 범위를 지정, 포함 여부는 플래그로 설정</td>
+      </tr>
+    </table>
+    <h2>Stack 클래스의 주요 메서드와 기능</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>메서드 이름</th>
+          <th>리턴타입</th>
+          <th>기능</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>push(E item)</td>
+          <td>E</td>
+          <td>매개변수 item을 stack 추가</td>
+        </tr>
+        <tr>
+          <td>pop()</td>
+          <td>E</td>
+          <td>최상위 데이터를 꺼냄(데이터 개수 줄어듬)</td>
+        </tr>
+        <tr>
+          <td>peek()</td>
+          <td>E</td>
+          <td>가장 상위에 있는 요소 조회(데이터 갯수 변화 없음)</td>
+        </tr>
+        <tr>
+          <td>search(Object)</td>
+          <td>int</td>
+          <td>
+            stack 원소의 위치값 리턴<br />(최상위 기준 1로 시작 아래로 내려 갈
+            수록 1씩 증가)
+          </td>
+        </tr>
+        <tr>
+          <td>empty()</td>
+          <td>boolean</td>
+          <td>stack 객체가 비워져 있는지 여부 리턴</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

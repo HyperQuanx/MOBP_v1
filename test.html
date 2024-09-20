@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>헤더 읽기 테스트</title>
+  </head>
+  <body>
+    <h1>서버에서 받은 헤더 값</h1>
+    <div>
+      <p>서버 시간: <span id="currentTime"></span></p>
+      <p>사용자 이름: <span id="userName"></span></p>
+      <p>Message: <span id="message"></span></p>
+      <p>숫자는 오나? <span id="num"></span></p>
+    </div>
+
+    <script>
+      fetch("http://localhost:8080/MyTest/responseTest.jsp")
+        .then((response) => {
+          const currentTime = response.headers.get("CurrentTime");
+          const userName = response.headers.get("User-Name"); // 헤더 이름 일치
+          const message = response.headers.get("Message"); // 헤더 이름 일치
+          const num = response.headers.get("Num");
+
+          document.getElementById("currentTime").textContent = currentTime;
+          document.getElementById("userName").textContent = userName;
+          document.getElementById("message").textContent = message;
+          document.getElementById("num").textContent = num;
+
+          console.log(currentTime);
+          console.log(userName);
+          console.log(message);
+          console.log(num);
+        })
+        .catch((error) => console.error("Error:", error));
+    </script>
+  </body>
+</html>
