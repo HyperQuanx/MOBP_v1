@@ -1,5 +1,5 @@
 img {
-  width: 800px;
+  width: 600px;
 }
 table {
   border-collapse: collapse;
@@ -14,4 +14,8 @@ td {
 .jspList > li {
   cursor: pointer;
   list-style: none;
+}
+
+a {
+  color: #478abc;
 }

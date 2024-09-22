@@ -1,14 +1,17 @@
+img {
+  width: 600px;
+}
 table {
   border-collapse: collapse;
 }
 
-th,
+table > tr > th,
 td {
-  padding: 0;
-  margin: 0;
-  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
 }
 
-.test {
-  display: flex; justify-content: center; align-items: center;
+.javaList > li {
+  cursor: pointer;
+  list-style: none;
 }
