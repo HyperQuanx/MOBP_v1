@@ -3,11 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>JSP02_JSP기초</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>JSP (Java Server Page)</h1>
+    <h1>JSP 기본 개념</h1>
+
+    <br />
+    <br />
+
+    <h2>JSP (Java Server Page)</h2>
     <p>- 동적인 웹 페이지를 개발하기 위한 웹 프로그래밍 기술</p>
     <p>- JAVA 를 사용하여 서버측에서 웹 페이지를 생성하여 웹 브라우저로 전송</p>
 
@@ -151,7 +156,7 @@
     <br />
 
     <h3>서블릿</h3>
-    <p>- 클라이언트 -> 서버에 요청 -> 응답 결과 전송</p>
+    <p>- 클라이언트의 요청 -> 서버 처리 -> 응답 결괏값 전송</p>
     <p>- 자바(.java) 를 컴파일 -> 클래스(.class) 파일로 변환</p>
     <p>- 서블릿 컨테이너로 아파치 톰캣 사용</p>
 
@@ -169,58 +174,106 @@
     <p>- HTML 선 작업 -> 필요 부분에 Java를 사용하는 형태</p>
     <p>- JSP 파일 -> 서블릿으로 변환 후 실행</p>
     <p>- JSP는 FrontEnd 부분을 담당, 서블릿은 BackEnd 를 담당</p>
-
+    <br />
+    <br />
+    <h3>JSP의 구동 방식</h3>
+    <ol>
+      <li>클라이언트가 웹 서버에 요청 (Request)</li>
+      <li>JSP 파일 확인 및 변환 (JSP to Servlet)</li>
+      <li>서블릿 컴파일 (Servlet Compilation)</li>
+      <li>서블릿 실행 (Servlet Execution)</li>
+      <li>HTML 응답 (Response)</li>
+      <li>재요청 시 서블릿 실행</li>
+    </ol>
     <img src="jspPicture/Group 69.png" alt="" />
 
-    <p>.html - 정적 페이지</p>
-    <p>.jsp - 동적 페이지</p>
+    <br />
+    <br />
+    <br />
+
+    <h3>서블릿과 JSP의 주요 차이</h3>
+    <table border="1">
+      <tr>
+        <th>서블릿</th>
+        <th>JSP</th>
+      </tr>
+      <tr>
+        <td>자바 코드 안에서 전체 HTML 페이지를 생성</td>
+        <td>HTML 코드 안에서 필요한 부분만 자바 코드를 스크립트 형태로 추가</td>
+      </tr>
+      <tr>
+        <td>변수 선언 및 초기화가 반드시 선행되어야 함.</td>
+        <td>자주 쓰이는 기능을 내장 객체로 제공하여 즉시 사용할 수 있다.</td>
+      </tr>
+      <tr>
+        <td>컨트롤러를 만들 때 사용</td>
+        <td>처리된 결과를 보여주는 뷰를 만들 때 사용</td>
+      </tr>
+    </table>
 
     <br />
     <br />
     <br />
 
-    <h3>선언부 (`<%! ... %>`)</h3>
-    <ul>
-      <li>
-        JSP 페이지 내에서 <strong>메서드나 변수</strong>를 선언할 때 사용됩니다.
-      </li>
-      <li>
-        JSP 페이지가 실행될 때 한 번만 처리되며, 클래스 수준에서 선언됩니다.
-      </li>
-    </ul>
+    <h2>JSP 파일 기본 구조</h2>
 
-    <h3>스크립틀릿 (`<% ... %>`)</h3>
-    <ul>
-      <li>
-        JSP 페이지 내에서 <strong>자바 코드를 실행</strong>할 수 있는
-        블록입니다.
-      </li>
-      <li>이 코드는 JSP 페이지가 클라이언트에게 응답하기 전에 실행됩니다.</li>
-    </ul>
+    <h3>지시어</h3>
 
-    <h3>표현식 (`<%= ... %>`)</h3>
-    <ul>
-      <li>자바 표현식의 <strong>결과를 직접 출력</strong>할 때 사용됩니다.</li>
-      <li>
-        이 표현식의 결과는 자동으로 HTML에 삽입되어 브라우저로 전달됩니다.
-      </li>
-    </ul>
+    <p>
+      JSP 페이지를 자바 코드로 변환하는 데 필요한 정보를 JSP 엔진에 알려줌.<br />
+      주로 스크립트 언어나 인코딩 방식 등을 설정함.
+    </p>
+    <h4>page 지시어</h4>
+    <table border="1">
+      <tr>
+        <th>속성</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td>language</td>
+        <td>스크립트의 언어를 정의. 기본값은 "java"입니다.</td>
+      </tr>
+      <tr>
+        <td>contentType</td>
+        <td>
+          응답의 MIME 타입을 정의. 기본값은 "text/html;
+          charset=ISO-8859-1"입니다.
+        </td>
+      </tr>
+      <tr>
+        <td>import</td>
+        <td>JSP에서 사용할 자바 클래스나 패키지를 불러옵니다.</td>
+      </tr>
+      <tr>
+        <td>session</td>
+        <td>세션 사용 여부를 지정. 기본값은 true입니다.</td>
+      </tr>
+      <tr>
+        <td>isELIgnored</td>
+        <td>EL(Expression Language) 무시 여부를 지정. 기본값은 false입니다.</td>
+      </tr>
+      <tr>
+        <td>errorPage</td>
+        <td>에러가 발생할 때 호출될 JSP 페이지를 지정합니다.</td>
+      </tr>
+      <tr>
+        <td>isErrorPage</td>
+        <td>현재 페이지가 에러 처리 페이지인지 여부를 지정합니다.</td>
+      </tr>
+      <tr>
+        <td>autoFlush</td>
+        <td>
+          버퍼가 가득 찼을 때 자동으로 플러시할지 여부를 지정합니다. 기본값은
+          true입니다.
+        </td>
+      </tr>
+      <tr>
+        <td>buffer</td>
+        <td>버퍼의 크기를 지정합니다. 기본값은 8KB입니다.</td>
+      </tr>
+    </table>
 
-    <br />
-    <br />
-    <br />
-
-    <p>지시어(Directive)</p>
-    <p>JSP를 자바(서블릿)으로 변환 시에 필요한 정보를 JSP 엔진에게 알려줌</p>
-    <p>스크립트 언어, 인코딩 방식 등을 설정</p>
-    <p>&lt;%@ 지시어 종류 속성1="값1" ,,, %&gt;</p>
-
-    <p>page 지시어</p>
-    <p>문서의 종류, 타입, 에러 메시지, MINE 타입 등을 설정</p>
-
-    <br />
-    <br />
-    <br />
+    <p>다음에 둘이 취합해서 정리하자</p>
 
     <table border="1">
       <tr>
@@ -284,10 +337,55 @@
         <td>false</td>
       </tr>
     </table>
+    <br />
+    <br />
+
+    <h4>include 지시어</h4>
+
+    <p>
+      반복되는 부분을 별도의 파일에 작성해두고 필요한 페이지에서 include
+      지시어로 포함시킬 수 있다.
+    </p>
+    <p>&lt;%@ include file="포함할 파일의 경로" %&gt;</p>
 
     <br />
     <br />
-    <br />
+
+    <h4>taglib 지시어</h4>
+
+    <p>
+      EL(표현 언어)에서 자바 클래스의 메서드를 호출하거나 JSTL(JSP 표준 태그
+      라이브러리)을 사용하기 위해 선언
+    </p>
+
+    <h3>선언부 (`<%! ... %>`)</h3>
+    <ul>
+      <li>
+        JSP 페이지 내에서 <strong>메서드나 변수</strong>를 선언할 때 사용됩니다.
+      </li>
+      <li>
+        JSP 페이지가 실행될 때 한 번만 처리되며, 클래스 수준에서 선언됩니다.
+      </li>
+    </ul>
+
+    <h3>스크립틀릿 (`<% ... %>`)</h3>
+    <ul>
+      <li>
+        JSP 페이지 내에서 <strong>자바 코드를 실행</strong>할 수 있는 블록
+      </li>
+      <li>이 코드는 JSP 페이지가 클라이언트에게 응답하기 전에 실행된다.</li>
+    </ul>
+
+    <h3>표현식 (`<%= ... %>`)</h3>
+    <ul>
+      <li>
+        프로그래밍 언어에서 표현식은
+        <strong>실행 결과로 하나의 값이 남는 문장</strong>
+        을 뜻한다.
+      </li>
+      <li>자바 표현식의 <strong>결과를 직접 출력</strong>할 때 사용된다.</li>
+      <li>이 표현식의 결과는 자동으로 HTML에 삽입되어 브라우저로 전달된다.</li>
+    </ul>
 
     <h3>language, contentType, pageEncoding 속성</h3>
     <p>- JSP 페이지 생성 시 기본 생성되는 지시어</p>
@@ -367,5 +465,146 @@
         </li>
       </ul>
     </ul>
+
+    <hr />
+
+    <h2>JSP 요약</h2>
+    <p>JSP는 지시어, 스크립트 요소로 구성</p>
+    <ol>
+      <li>
+        지시어
+        <ul>
+          <li>JSP에 대한 기본적인 설정을 하는 요소</li>
+          <li>page, include, taglib</li>
+          <li>
+            page 지시어
+            <ul>
+              <li>JSP 페이지에 대한 기본 정보 설정</li>
+              <li>language, contentType, pageEncoding, import, session,,,</li>
+            </ul>
+          </li>
+          <li>
+            include 지시어
+            <ul>
+              <li>JSP나 HTML 파일을 포함 시킬 때 사용</li>
+            </ul>
+          </li>
+          <li>
+            taglib 지시어
+            <ul>
+              <li>
+                EL(표현언어, Expression Language) 에서 자바 클래스 호출,
+                JSTL(JSP 표준 태그 라이브러리)을 사용하기 위해 선언
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        스크립트 요소
+        <ul>
+          <li>선언부, 표현식, 스크립틀릿</li>
+          <li>
+            선언부
+            <ul>
+              <li>멤버 변수나 메서드 선언 할 때</li>
+            </ul>
+          </li>
+          <li>
+            표현식
+            <ul>
+              <li>변수, 값, 메서드 출력 시</li>
+            </ul>
+          </li>
+          <li>
+            스크립틀릿
+            <ul>
+              <li>
+                자바 코드를 작성하는 영역, 선언부 등에서 작성한 값 프로세스 처리
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+    <!-- <h3>language, contentType, pageEncoding 속성</h3>
+    <p>- JSP 페이지 생성 시 기본 생성되는 지시어</p>
+    <p>- language : 스크립팅 언어 지정</p>
+    <p>- contentType : 문서의 MINE, 캐릭터 셋 지정</p>
+    <p>- pageEncoding : 소스 코드 인코딩 방식 -> 서버하고 다르면 오동작</p>
+    <p>- import 속성</p>
+    <p>
+      - - java.lang ~~ : 패키지에 속하지 않는 클래스를 JSP 문서에 삽입하기 위해
+      사용
+    </p>
+
+    <br />
+    <br />
+    <br />
+
+    <h3>buffer, autoFlush</h3>
+
+    <p>
+      - JSP 에서는 응답 결과를 바로 리턴하지 않고, 버퍼에 저장 후 일정량이 되면
+      출력
+    </p>
+    <p>- 요청마다 매번 리턴하는 것보다 효율적</p>
+    <p>- 버퍼를 사용함으로써 포워드(forward), 에러 페이지를 처리할 수 있음</p>
+
+    <br />
+    <br />
+    <br />
+
+    <h3>include 지시어</h3>
+
+    <p>- <%@ include file=”포함할 파일 경로” %></p>
+    <p>
+      - 웹 사이트에서 반복되는 영역, 페이지를 여러 페이지에서 함께 사용할 때
+      사용함
+    </p>
+    <p>- JSP 에서 다른 JSP 페이지를 삽입할 때 사용</p>
+    <p>- include된 파일의 내용도 include한 파일의 내용으로 인식</p>
+
+    <br />
+    <br />
+    <br />
+
+    <h3>스크립트 요소</h3>
+    <ul>
+      <li>특징</li>
+      <ul>
+        <li>JSP에서 자바 코드를 직접 작성 가능하게 함</li>
+        <li>선언부, 표현식, 스크립틀릿</li>
+        <li>
+          1. 선언부
+          <ul>
+            <li>
+              스크립틀릿이나 표현식에서 사용할 프로퍼티(멤버 변수), 메서드(멤버
+              함수)
+            </li>
+            <li>서블릿으로 변환 시 _jspService() 메서드 외부에 선언</li>
+            <li>&lt;%! %&gt;</li>
+          </ul>
+        </li>
+        <li>
+          2. 표현식(Expression)
+          <ul>
+            <li>변수 값 출력 시 사용</li>
+            <li>반환 값이 있는 메서드 호출</li>
+            <li>out.print()를 단순하게 표현</li>
+            <li>&lt;%= 출력 값, 변수(함수) %&gt;</li>
+          </ul>
+        </li>
+        <li>
+          3. 스크립틀릿
+          <ul>
+            <li>실행할 자바 코드를 작성하는 부분</li>
+            <li>서블릿으로 변환 시 _jspService() 메서드 내부에 선언</li>
+            <li>&lt;% ~~~ %&gt;</li>
+          </ul>
+        </li>
+      </ul>
+    </ul> -->
   </body>
 </html>

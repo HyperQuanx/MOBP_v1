@@ -21,8 +21,10 @@
         .then((response) => {
           const currentTime = response.headers.get("CurrentTime");
           const eng = response.headers.get("Eng");
-          const userName = response.headers.get("User-Name");
-          const message = response.headers.get("Message");
+          const userName = decodeURIComponent(
+            response.headers.get("User-Name")
+          );
+          const message = decodeURIComponent(response.headers.get("Message"));
           const num = response.headers.get("Num");
           const items = response.headers.get("Items");
 
