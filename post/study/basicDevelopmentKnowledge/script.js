@@ -1,7 +1,7 @@
 let i = 1;
 
 while (i > 0) {
-  let postsLink = document.querySelector(`#jsp${i}`);
+  let postsLink = document.querySelector(`#bdk${i}`);
   if (!postsLink) {
     break;
   }
