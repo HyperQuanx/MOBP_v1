@@ -1,3 +1,10 @@
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+}
+
 li {
   list-style-type: none;
   margin: 20px;
@@ -7,4 +14,59 @@ li {
 a {
   text-decoration: none;
   color: black;
+}
+
+/* 나중에 이걸로 날씨 만들면 재밌겠네 일단 비는 완성*/
+.rain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.drop {
+  position: absolute;
+  bottom: 100%;
+  width: 2px;
+  height: 30px;
+  background: #478abc;
+  animation: fall 1s linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+.text {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  position: relative;
+  z-index: 15;
+}
+
+.letter {
+  opacity: 0;
+  transform: scale(0.5);
+  animation: bang 1.5s infinite;
+}
+
+@keyframes bang {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
 }
