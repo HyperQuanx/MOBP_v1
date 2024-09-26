@@ -7,6 +7,77 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    
+    <div>
+      <h2>DB 연결 기본 과정</h2>
+      <ol>
+        <li>
+          미리 만들어놓은 JDBConnect.java를 사용해서 DB와 연결
+          <ul>
+            <li>
+              <code>&lt;% JDBConnect jdbc = new JDBConnect();</code>
+            </li>
+          </ul>
+        </li>
+        <li>
+          String 자료형으로 sql 문 작성 후 변수에 대입
+          <ul>
+            <li><code>String sql = "SELECT * FROM test_db";</code></li>
+          </ul>
+        </li>
+        <li>
+          PreparedStatement 객체를 생성하고 SQL 쿼리를 준비시킴
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li></li>
+        <li></li>
+      </ol>
+      <br />
+      <br />
+      <br />
+      <h2>JDBC 프로그래밍 순서</h2>
+      <ol>
+        <li>JDBC 드라이버 로드 -> DB마다 다르다.</li>
+        <li>데이터 베이스 연결 -> DriverManager <= 연결 정보(url, id, pwd)</li>
+        <li>쿼리문 작성</li>
+        <li>PreparedStatement 문 작성 -> statement 구문</li>
+        <li>
+          쿼리 실행 -> createStatement, prepareCreate 둘의 적용 방법이 다르다.
+        </li>
+        <li>
+          결과 처리 -> 조회 ResultSet, 등록 / 수정 / 삭제 : int 값으로 처리
+        </li>
+        <li>연결 해제 -> 작은 범위 -> 큰 범위 순으로 해제</li>
+      </ol>
+
+      <br />
+      <br />
+
+      <h2>쿼리문 정리</h2>
+      <ul>
+        <li>정적 쿼리 : Statement</li>
+        <li>동적 쿼리 : PreparedStatement (이걸 사용 권장)</li>
+        <li>
+          메서드
+          <ul>
+            <li>
+              executeQuery()
+              <ul>
+                <li>SELECT 할 때</li>
+                <li>리턴 타입 : ResultSet</li>
+              </ul>
+            </li>
+            <li>
+              executeUpdate()
+              <ul>
+                <li>INSERT / UPDATE / DELETE 할 때</li>
+                <li>리턴 타입 : Int</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </body>
 </html>

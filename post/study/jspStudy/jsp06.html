@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>DB</h1>
+
+    <h2>DB 접속 방법</h2>
+    <p>JDBC Connection 이용</p>
+    <ul>
+      <li>기본 생성자에 연결 정보를 직접 설정</li>
+      <li>
+        application 객체로 접근 방법
+        <ul>
+          <li>
+            web.xml 에 설정 방법
+            <ul>
+              <li>
+                web.xml 에 설정 정보를 저장
+                <ul>
+                  <li>
+                    context-param
+                    <ul>
+                      <li>param-name</li>
+                      <li>param-value</li>
+                    </ul>
+                  </li>
+                  <li>Driver, URL, ID, Password</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        Connection Pool 방법
+        <ul>
+          <li>server.xml, context.xml 에 정보 저장</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>DB 조회 방법</h2>
+    <ul>
+      <li>JDBConnection 이용 연결 설정</li>
+      <li>작성한 쿼리를 이용하여 statement 설정 -> prepared statement</li>
+      <li>Resultset 설정</li>
+      <li>Resultset 순회 결과 출력</li>
+    </ul>
+    
+    <ul>
+        <li>Connection : 데이터베이스와 연결을 담당</li>
+        <li>Statement : 인파라미터가 없는 정적 쿼리문을 실행할 때 사용</li>
+        <li>PreparedStatement : 인파라미터</li>
+        <li></li>
+    </ul>
+  </body>
+</html>

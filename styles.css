@@ -34,6 +34,7 @@ a {
   width: 2px;
   height: 30px;
   background: #478abc;
+  border-radius: 20px;
   animation: fall 1s linear infinite;
 }
 
