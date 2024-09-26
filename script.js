@@ -1,6 +1,6 @@
 // 이건 나중에 수정하자
 const textContent = "CSS는 나중에 작성하자";
-const textContainer = document.getElementById("animatedText");
+const textContainer = document.getElementById("aniText");
 
 textContent.split("").forEach((char, index) => {
   const letterDiv = document.createElement("div");
