@@ -129,6 +129,178 @@
       <p>timeStamp를 사용하기 때문에 long 사용</p>
 
       <p>DBPool로 연결하는게 훨씬 빠름</p>
+
+      <h2>Action Tag</h2>
+      <ul>
+        <li>
+          액션 태그의 특징
+          <ul>
+            <li>JSP의 표준 태그</li>
+            <li>페이지 사이에서 이동 제어</li>
+            <li>페이지 사이에서 자바 빈 생성 시 사용</li>
+            <li>특별한 선언없이 &lt;jsp:태그명 /&gt; 으로 사용</li>
+            <li>
+              HTML 태그처럼 사용하지만 JSP 이므로 서버에서 처리된 결과(HTML)만
+              출력
+            </li>
+            <li>XML 문법을 따름 -> 문법에 대해 HTML 보다 엄격함</li>
+            <li>반드시 종료 태그를 닫아야 함.</li>
+            <li>액션 태그 사이에 주석 사용 불가</li>
+            <li>속성값 부여 시 &lt;%=%&gt;, 표현식 사용 불가</li>
+          </ul>
+        </li>
+        <li>
+          액션 태그의 종류
+          <ul>
+            <li>
+              &lt;jsp:include 속성값 /&gt; : 외부 파일을 현재 파일에 포함 시킴
+              => &lt;% include % &gt;
+            </li>
+            <li>
+              &lt;jsp:forward /&gt; : 다른 페이지로 요청을 전달(페이지 이동)
+            </li>
+            <li>
+              &lt;jsp:useBean /&gt;, &lt;jsp:getProperty /&gt;,
+              &lt;jsp:setProperty /&gt; : 자바빈즈를 생성, 값 추출, 설정
+            </li>
+            <li>
+              &lt;jsp:param /&gt; : 매개 변수 전달, &lt;jsp:include /&gt;,
+              &lt;jsp:forward /&gt; 와 함께 사용
+              <ul>
+                <li>String 만 전달 가능</li>
+                <li>
+                  객체 : 4가지 scope을 이용 page, request, session, application
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          include 지시어와 &lt;jsp:include /&gt;태그
+          <ul>
+            <li>현재 페이지에 다른 JSP 파일을 포함시킬 때 사용</li>
+            <li>동작성에 차이가 있음</li>
+            <li>
+              <table border="1">
+                <tr>
+                  <th></th>
+                  <th>액션태그</th>
+                  <th>지시어</th>
+                </tr>
+                <tr>
+                  <td>형식</td>
+                  <td>&lt;jsp:include page='파일경로' /&gt;</td>
+                  <td>&lt;%@ include page='파일경로' %&gt;</td>
+                </tr>
+                <tr>
+                  <td>표현식</td>
+                  <td>
+                    표현식 사용 가능 <br />
+                    &lt;jsp:include page="&lt;%= 변수 %&gt;" /&gt;
+                  </td>
+                  <td>
+                    사용 불가 <br />
+                    &lt;%@ include file="&lt;%= 변수 %&gt;" %&gt; 사용할 수 없음
+                  </td>
+                </tr>
+                <tr>
+                  <td>포함 방식</td>
+                  <td>
+                    포함할 파일로 페이지 이동 -> 결과를 현재 페이지에 포함
+                  </td>
+                  <td>페이지 소스 자체를 현재 페이지에 포함시킨 후 처리</td>
+                </tr>
+                <tr>
+                  <td>변수</td>
+                  <td>
+                    포함된(포함시킨) 파일에서 생성한 변수 포함시킨 파일에서 사용
+                    불가
+                  </td>
+                  <td>포함된(포함시킨) 파일에서 생성한 변수 사용 가능</td>
+                </tr>
+                <tr>
+                  <td>page 영역</td>
+                  <td>공유되지 않음</td>
+                  <td>공유됨</td>
+                </tr>
+                <tr>
+                  <td>request 영역</td>
+                  <td>공유됨</td>
+                  <td>공유됨</td>
+                </tr>
+              </table>
+            </li>
+          </ul>
+        </li>
+        <li>
+          자바빈의 사용
+          <ul>
+            <li>
+              &lt;jsp:useBean&gt;, &lt;jsp:setProperty&gt;,
+              &lt;jsp:getProperty&gt; 태그 사용
+            </li>
+            <li>자바빈즈를 생성 및 설정 시 사용</li>
+            <li>
+              자바빈즈는 프로퍼티(멤버변수), 메서드(멤버함수) getter/setter 로만
+              구성
+            </li>
+            <li>
+              자바빈즈의 생성
+              <ul>
+                <li>
+                  &lt;jsp:useBean id="자바빈즈 이름(저번에 사용했던 memberDTO가
+                  됨)" class="사용할 클래스명(dto.MemberDTO)"
+                  property="프로퍼티명" value="프로퍼티값" /&gt;
+                </li>
+              </ul>
+            </li>
+            <li>
+              가지고 올 때
+              <ul>
+                <li>
+                  &lt;jsp:getProperty name="자바빈즈 이름" property="프로퍼티명
+                  /&gt;
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <h2>액션태그 정리</h2>
+      <ul>
+        <li>
+          &lt;jsp:include&gt; 태그 : 특정 페이지를 현재 페이지에 포함시킬 때
+          사용
+          <ul>
+            <li>생성된 html 결과 리턴</li>
+            <li>page 범위 공유 X, request 범위 공유</li>
+          </ul>
+        </li>
+        <li>
+          include 페이지 지시자와 유사, 동작성은 다르다.
+          <ul>
+            <li>jsp 내용이 포함시키는 페이지에 통째로 포함</li>
+          </ul>
+        </li>
+        <li>&lt;jsp:forward&gt; 태그 : 요청을 전달하는 포워드에 사용</li>
+        <li>
+          &lt;jsp:useBean&gt;, &lt;jsp:setProperty&gt;, &lt;jsp:getProperty&gt;
+          태그
+          <ul>
+            <li>자바빈즈 생성, 설정, 조회 시 사용</li>
+            <li>
+              *(와일드카드)는 설정 시 전송된 모든 파라미터를 객체의 프로퍼티에
+              자동으로 맵핑 -> 전송 태그의 이름 == 객체의 프로퍼티명
+            </li>
+          </ul>
+        </li>
+        <li>
+          &lt;jsp:param&gt; 태그 : 인클루드, 포워드 시 매개변수를 넘길 때 사용
+        </li>
+      </ul>
+      <p>
+        필드에서 톰캣 버전 확인하자 톰캣 버전에 따라 필요한 JDK가 있을 수도 있음
+      </p>
     </div>
   </body>
 </html>
