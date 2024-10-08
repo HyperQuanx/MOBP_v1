@@ -683,5 +683,26 @@
     <br />
 
     <h3>서블릿 작성 규칙</h3>
+    <ol>
+      <li>
+        기본적으로 jakarta.servlet, jakarta.servlet.http.java.io 패키지를 임포트
+        한다.
+      </li>
+      <li>
+        서블릿 클래스는 반드시 public으로 선언, HttpServlet을 상속받아야 함
+      </li>
+      <li>
+        클라이언트의 요청을 처리하기 위해 doGet()이나 doPost()를 반드시
+        오버라이딩 해야함.
+      </li>
+      <li>
+        doGet(), doPost() 메서드로 ServletException과 IOException 예외를
+        던지도록 선언
+      </li>
+      <li>
+        doGet() 또는 doPost() 메서드를 호출할 때의 매개변수는
+        HttpServletRequest와 HttpServletResponse를 사용함.
+      </li>
+    </ol>
   </body>
 </html>
