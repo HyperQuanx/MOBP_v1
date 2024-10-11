@@ -1,21 +1,114 @@
-img {
-  width: 600px;
-}
-table {
-  border-collapse: collapse;
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap");
+
+body {
+  font-family: "Noto Sans KR", "Roboto", sans-serif;
+  background-color: #f0f2f5; /* 부드러운 배경색 */
+  color: #333; /* 텍스트 색상 */
+  line-height: 1.8;
+  margin: 0;
+  padding: 20px;
 }
 
-table > tr > th,
+h2,
+h3 {
+  color: #2c3e50; /* 진한 색의 제목 */
+  margin-bottom: 10px;
+  border-bottom: 2px solid #3498db; /* 제목 아래 얇은 밑줄 */
+  padding-bottom: 5px;
+}
+
+p {
+  margin-bottom: 15px;
+  color: #555; /* 중간 밝기의 텍스트 색상 */
+}
+
+ul,
+ol {
+  padding-left: 20px;
+  margin-bottom: 20px;
+  color: #555; /* 중간 밝기의 텍스트 색상 */
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+ul ul {
+  padding-left: 20px;
+  list-style-type: circle;
+}
+
+strong {
+  color: #3498db; /* 강조된 텍스트 색상 */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table,
+th,
+td {
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #3498db;
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+
 td {
   padding: 10px;
-  text-align: center;
+  background-color: #fff;
 }
 
-.jspList > li {
-  cursor: pointer;
-  list-style: none;
+caption {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #2c3e50;
 }
 
-a {
-  color: #478abc;
+.java-code {
+  font-family: Consolas, "Courier New", monospace;
+  line-height: 1.8;
+  background-color: #1e2a38; /* 더 어두운 배경으로 세련된 느낌 */
+  color: #dcdfe4; /* 약간 더 부드러운 밝기의 텍스트 색상 */
+  padding: 20px; /* 패딩을 조금 더 여유롭게 */
+  border: 1px solid #3b4a5a; /* 테두리에 미세한 색상 추가 */
+  border-radius: 10px; /* 더 둥근 모서리 */
+  width: 100%;
+  overflow-x: auto; /* 가로 스크롤 허용 */
+  resize: vertical; /* 세로 크기 조정만 가능 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* 더 부드러운 그림자 효과 */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* 배경색과 그림자 변화에 애니메이션 추가 */
+}
+
+.java-code:hover {
+  background-color: #253244; /* 호버 시 조금 더 밝은 배경 */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강화 */
+}
+
+pre,
+code {
+  background: none;
+  color: inherit;
+}
+
+textarea {
+  font-family: inherit;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .java-code {
+    padding: 10px;
+  }
 }

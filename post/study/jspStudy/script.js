@@ -19,3 +19,13 @@ while (i > 0) {
 
   i++;
 }
+
+const autoResize = (textarea) => {
+  textarea.style.height = "auto";
+  textarea.style.height = textarea.scrollHeight - 30 + "px";
+};
+
+document.addEventListener("DOMContentLoaded", function () {
+  const textareas = document.querySelectorAll(".java-code");
+  textareas.forEach(autoResize);
+});

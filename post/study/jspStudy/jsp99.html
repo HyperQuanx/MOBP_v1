@@ -26,9 +26,7 @@
         </li>
         <li>
           PreparedStatement 객체를 생성하고 SQL 쿼리를 준비시킴
-          <ul>
-            <li></li>
-          </ul>
+          <ul></ul>
         </li>
       </ol>
       <br />
@@ -305,6 +303,7 @@
       <hr />
       <br />
       <br />
+
       <h2>표현언어</h2>
       <ul>
         <li>표현언어(EL : Expression Language)</li>
@@ -551,7 +550,6 @@
     <h2>서블릿</h2>
 
     <br />
-    <br />
 
     <h3>서블릿이란?</h3>
     JSP 나오기 전에 자바로 웹 어플리케이션을 개발했던 방법<br />
@@ -704,5 +702,66 @@
         HttpServletRequest와 HttpServletResponse를 사용함.
       </li>
     </ol>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <h3>서블릿 요약</h3>
+
+    <ul>
+      <li>서블릿을 사용하면 MVC 패턴을 적용한 모델2 방식을 적용할 수 있다.</li>
+      <li>요청 이름(URL)과 처리할 파일이 분리되어 있으므로 매핑이 필요함.</li>
+      <li>
+        요청 이름과 매핑 정보는 web.xml, @WebServlet 어노테이션을 이용하여 매핑
+      </li>
+      <li>서블릿은 public으로 선언해야 함.</li>
+      <li>
+        서블릿은 HttpServlet 상속 후 doGet() 또는 doPost() 반드시 오버라이드
+        해야 한다.
+      </li>
+      <li>
+        와일드카드(*)를 사용하여 여러가지 요청에 대해 하나의 서블릿으로 매핑
+        가능
+      </li>
+      <li>
+        수명주기에서처럼 만들어 둔 객체 재사용하므로 처리 속도가 빨라질 수 있다.
+      </li>
+    </ul>
+
+    <br />
+    <br />
+    <hr />
+    <br />
+    <br />
+
+    <h2>파일 업로드</h2>
+    <ul>
+      <li>
+        ~ Tomcat 9 version
+        <ul>
+          <li>cos 라이브러리 사용 : http://servlet.com/cos</li>
+          <li>
+            아파치 라이브러리 : mvnrepository 에서 검색<br />
+            (https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload)
+          </li>
+        </ul>
+      </li>
+      <li></li>
+      <li>form 태그를 이용하여 전송</li>
+      <li>method 속성은 POST</li>
+      <li>
+        enctype : multipart/form-data
+        <ul>
+          <li>
+            &lt;form method="POST" enctype="multipart/form-data"
+            action="경로"&gt;<br />
+            &lt;/form&gt;
+          </li>
+        </ul>
+      </li>
+    </ul>
   </body>
 </html>
