@@ -295,6 +295,10 @@ public class Main {
         <td>인터페이스</td>
         <td>구현할 메서드의 선언만 포함하며, 클래스가 이를 구현하도록 강제</td>
       </tr>
+      <tr>
+        <td>void</td>
+        <td>아무 값도 반환하지 않을 때 사용</td>
+      </tr>
     </table>
 
     <br />
@@ -353,8 +357,8 @@ class Person {
 
     <ul>
       <li>
-        <strong>디폴트 생성자</strong>: <code>Person()</code>과 같이 매개변수가
-        없는 생성자이며, 객체 생성 시 기본값을 설정함.
+        <strong>디폴트 생성자</strong>: <strong>Person()</strong>과 같이
+        매개변수가 없는 생성자이며, 객체 생성 시 기본값을 설정함.
       </li>
       <li>
         <strong>오버로딩</strong>: 동일한 이름의 생성자가 여러 개 정의되어,
@@ -362,7 +366,7 @@ class Person {
       </li>
       <li>
         <strong>오버로딩된 생성자</strong>:
-        <code>Person(String name, int age)</code>와 같이 매개변수가 있는
+        <strong>Person(String name, int age)</strong>와 같이 매개변수가 있는
         생성자로, 전달받은 값을 이용해 객체를 초기화함.
       </li>
     </ul>
@@ -905,8 +909,559 @@ if (animal instanceof Dog) {
       </li>
     </ul>
 
-    <h3>클래스, 추상 클래스, 인터페이스의 차이점</h3>
+    <br />
 
+    <h3>추상 클래스 예제</h3>
+    <textarea class="javaCode" readonly>
+package abstractStudy;
+
+abstract class Animal {
+  // 일반 메서드
+  public void eat() {
+    System.out.println("먹기");
+  }
+  
+  // 추상 메서드 (자식 클래스에서 구현 할 예정)
+  public abstract void sound();
+}
+
+
+// 추상 클래스를 상속하는 클래스
+class Dog extends Animal {
+  // 추상 메서드 구현 1
+  @Override
+  public void sound() {
+    System.out.println("강아지는 멍멍");
+  }
+}
+
+
+class Cat extends Animal {
+  // 추상 메서드 구현 2
+  @Override
+  public void sound() {
+    System.out.println("고양이는 야옹");
+  }
+}
+
+
+public class Animal2 {
+    public static void main(String[] args) {
+      // 추상 클래스는 직접 인스턴스 생성 불가
+      // Animal animal = new Animal();
+      // 상속받은 클래스들로 만들기
+      Animal dog = new Dog();
+      Animal cat = new Cat();
+
+      dog.eat();
+      dog.sound();
+      cat.eat();
+      cat.sound();
+    }
+}
+    </textarea>
+
+    <br />
+
+    <h3>추상 클래스의 템플릿 메서드</h3>
+    <p>
+      추상 클래스의 <strong>템플릿 메서드</strong>는 상위 클래스에서 작업의
+      흐름을 정의하고, 구체적인 세부 작업은 하위 클래스에서 구현하도록 하는
+      패턴. 상위 클래스가 기본적인 로직을 제공하고, 특정 단계는 하위 클래스에서
+      재정의해 동작을 결정함.
+    </p>
+    <p>
+      코드 재사용성을 높이고, 작업 흐름의 기본 구조를 유지하면서도 유연한 구현이
+      가능함. 여러 단계로 이루어진 작업에서 각 단계의 순서는 고정되지만, 각
+      단계의 구체적인 동작은 상황에 따라 달라질 때 유용함.
+    </p>
+
+    <br />
+
+    <h3>내가 만든 추상 클래스 예제</h3>
+    <textarea class="javaCode" readonly>
+// Player.java
+package game;
+
+public class Player {
+  private PlayerLevel level;
+
+  public Player() {
+    level = new BeginnerLevel();
+    level.showLevelMessage();
+  }
+
+  public PlayerLevel getLevel() {
+    return level;
+  }
+
+  public void upgradeLevel(PlayerLevel level) {
+    this.level = level;
+    level.showLevelMessage();
+  }
+
+  public void play(int count) {
+    level.go(count);
+  }
+}
+
+// PlayerLevel
+package game;
+
+// 각 레벨마다 메서드들이 조금씩 다르게 구현되기 때문에 추상 메서드로 선언
+abstract class PlayerLevel {
+  public abstract void run();
+  public abstract void turn();
+  public abstract void jump();
+  public abstract void showLevelMessage();
+  
+  // 재정의되면 안되기 때문에 final 선언
+  final public void go(int count) {
+    run();
+    for(int i =0; i < count; i++) {
+      jump();
+    }
+    turn();
+  }
+}
+
+// BeginnerLevel.java
+package game;
+
+public class BeginnerLevel extends PlayerLevel {
+  @Override
+  public void run() {
+    System.out.println("걷기");
+  }
+
+  @Override
+  public void jump() {
+    System.out.println("뛰기");
+  }
+
+  @Override
+  public void turn() {
+    System.out.println("한덕용급 회전");
+  }
+
+  @Override
+  public void showLevelMessage() {
+    System.out.println("-------------평민-------------");
+  }
+}
+
+// AdvancedLevel.java
+package game;
+
+public class AdvancedLevel extends PlayerLevel {
+  @Override
+  public void run() {
+    System.out.println("뛰어가기");
+  }
+
+  @Override
+  public void jump() {
+    System.out.println("높이 뛰기");
+  }
+
+  @Override
+  public void turn() {
+    System.out.println("김연아급 회전");
+  }
+
+  @Override
+  public void showLevelMessage() {
+    System.out.println("-------------환골탈태-------------");
+  }
+}
+
+// SuperLevel.java
+package game;
+
+public class SuperLevel extends PlayerLevel {
+  @Override
+  public void run() {
+    System.out.println("경공");
+  }
+
+  @Override
+  public void jump() {
+    System.out.println("허공답보");
+  }
+
+  @Override
+  public void turn() {
+    System.out.println("네지급 회천");
+  }
+
+  @Override
+  public void showLevelMessage() {
+    System.out.println("-------------화경-------------");
+  }
+}
+
+// gosu.java (실행 클래스)
+package game;
+
+public class gosu {
+  public static void main(String[] args) {
+    Player player1 = new Player();
+    player1.play(1);
+
+    AdvancedLevel levelUp = new AdvancedLevel();
+    player1.upgradeLevel(levelUp);
+    player1.play(2);
+
+    SuperLevel levelUpUp = new SuperLevel();
+    player1.upgradeLevel(levelUpUp);
+    player1.play(3);
+  }
+}
+
+// 출력 결과
+-------------평민-------------
+걷기
+뛰기
+한덕용급 회전
+-----------환골탈태-----------
+뛰어가기
+높이 뛰기
+높이 뛰기
+김연아급 회전
+-------------화경-------------
+경공
+허공답보
+허공답보
+허공답보
+네지급 회천
+
+    </textarea>
+
+    <br />
+
+    <h3>final 예약어</h3>
+    <table>
+      <tr>
+        <th>사용 위치</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td>변수</td>
+        <td>final 변수는 상수를 의미</td>
+      </tr>
+      <tr>
+        <td>메서드</td>
+        <td>final 메서드는 하위 클래스에서 재정의 불가</td>
+      </tr>
+      <tr>
+        <td>클래스</td>
+        <td>final 클래스는 상속 불가</td>
+      </tr>
+    </table>
+
+    <br />
+
+    <h2>인터페이스</h2>
+    <p>
+      <strong>인터페이스</strong>는 클래스가 구현해야 할 메서드의 청사진을
+      제공하는 역할을 함. 메서드의 선언만 있고, 구현은 없으며, 이를 구현하는
+      클래스에서 해당 메서드들을 정의해야 함.
+    </p>
+    <p>인터페이스는 추상 메서드와 상수로만 이루어져 있음</p>
+    <p>
+      인터페이스는 다중 상속을 지원하므로, 한 클래스가 여러 인터페이스를 구현할
+      수 있음. 이를 통해 클래스는 다양한 기능을 가지면서도 특정 메서드의 구현을
+      강제받을 수 있음.
+    </p>
+    <p>
+      Java 8부터는 인터페이스에 <strong>default 메서드</strong>와
+      <strong>static 메서드</strong>가 추가되어, 일부 메서드는 인터페이스
+      자체에서 구현이 가능해짐. 이를 통해 기본 구현을 제공하면서도, 필요에 따라
+      오버라이딩해 사용할 수 있는 유연성을 제공함.
+    </p>
+    <p>
+      인터페이스는 코드의 일관성을 유지하고, 다형성을 지원하며, 클래스 간의
+      결합도를 낮추는 데 중요한 역할을 함.
+    </p>
+
+    <br />
+
+    <h3>인터페이스 예제</h3>
+    <textarea class="javaCode" readonly>
+// Calc.java
+package interfaceStudy;
+
+public interface Calc {
+  // 인터페이스에서 선언한 변수는 컴파일 과정에서 상수로 변환됨
+  double PI = 3.14;
+  int ERROR = -999999999;
+
+  // 인터페이스에서 선언한 메서드는 컴파일 과정에서 추상 메서드로 변환됨
+  int add(int n1, int n2);
+  int substract(int n1, int n2);
+  int times(int n1, int n2);
+  int divide(int n1, int n2);
+}
+
+// Calculator.java
+package interfaceStudy;
+
+public abstract class Calculator implements Calc {
+  // 여기서 추상 메서드를 구현하지 않으면 이 클래스도 추상 클래스가 되버림.
+  @Override
+  public int add(int n1, int n2) {
+    return n1 + n2;
+  }
+
+  @Override
+  public int substract(int n1, int n2) {
+    return n1 - n2;
+  }
+}
+
+// CompleteCalc.java
+package interfaceStudy;
+
+public class CompleteCalc extends Calculator {
+  @Override
+  public int times(int n1, int n2) {
+    return n1 * n2;
+  }
+
+  @Override
+  public int divide(int n1, int n2) {
+    if (n2 != 0) {
+      return n1 / n2;
+    } else {
+      return Calc.ERROR;
+    }
+  }
+  
+  public void showInfo() {
+    System.out.println("Calc 인터페이스 구현 성공");
+  }
+}
+
+// CalcTest.java
+package interfaceStudy;
+
+public class CalcTest {
+  public static void main(String[] args) {
+    int a = 10;
+    int b = 2;
+
+    CompleteCalc calc = new CompleteCalc();
+
+    System.out.println(calc.add(a, b));
+    System.out.println(calc.substract(a, b));
+    System.out.println(calc.times(a, b));
+    System.out.println(calc.divide(a, b));
+    calc.showInfo();
+  }
+}
+    </textarea>
+
+    <br />
+
+    <h3>인터페이스를 사용하는 이유</h3>
+    <p>
+      <strong>인터페이스</strong>는 클라이언트 프로그램에 어떤 메서드를 제공
+      하는지 미리 알려주는 명세 또는 약속의 역할을 한다.<br />
+      ex) Qwer interface를 구현한 Q 클래스가 있고 이 클래스를 사용하는 T
+      프로그램이 있다고 가정할 때, Qwer interface에는 구현할 추상 메서드가 모두
+      선언되어 있고 어떤 매개변수가 사용되는지, 어떤 자료형 값이 반환되는지
+      선언되어 있다.<br />
+      즉, T 프로그램에서는 Q 클래스의 구현 코드 전체를 살펴보지 않고 QWER
+      interface의 선언부만 봐도 Q 클래스를 어떻게 사용해야 하는지 알 수 있다.
+    </p>
+    <p>
+      정리 : 인터페이스의 역할은 인터페이스를 구현한 클래스가
+      <strong>어떤 기능의 메서드를 제공하는지 명시</strong>하는 것
+    </p>
+    <p>
+      인터페이스와 다형성을 결합하면, 유연하고 확장성 있는 코드를 작성할 수
+      있음.
+    </p>
+
+    <br />
+
+    <h3>인터페이스의 디폴트 메서드와 정적 메서드</h3>
+
+    <p>
+      <strong>디폴트 메서드 (default method):</strong>
+      인터페이스에서 미리 구현된 메서드. 이를 통해 인터페이스에 새로운 메서드를
+      추가하더라도, 기존 구현 클래스가 영향을 받지 않게 기본 구현을 제공할 수
+      있음. 구현 클래스는 필요에 따라 이 메서드를 오버라이드할 수 있음.<br />
+      default 예약어 사용
+    </p>
+
+    <p>
+      <strong>정적 메서드 (static method):</strong>
+      인터페이스에서 직접 호출할 수 있는 메서드로, 객체를 생성하지 않고도 사용할
+      수 있음. 정적 메서드는 인터페이스와 관련된 공통 기능을 제공하는 데 유용함.
+    </p>
+
+    <p>
+      두 메서드는 인터페이스가 더 유연하고 기능적인 코드를 제공할 수 있게 해줌.
+    </p>
+
+    <br />
+
+    <h3>인터페이스는 한 클래스가 여러 인터페이스를 구현할 수 있다.</h3>
+
+    <p>
+      인터페이스는 다중 상속을 지원하므로, 한 클래스가 여러 인터페이스를 동시에
+      구현할 수 있음. 이를 통해 클래스는 다양한 기능을 결합할 수 있으며, 각
+      인터페이스가 정의한 메서드를 모두 구현해야 함.
+    </p>
+
+    <p>
+      다중 구현을 통해 코드의 유연성과 재사용성을 높일 수 있고, 서로 다른 기능을
+      가진 여러 인터페이스를 조합하여 하나의 클래스에서 처리 가능함.
+    </p>
+
+    <h4>예제 코드:</h4>
+
+    <textarea class="javaCode" readonly>
+// 첫 번째 인터페이스
+interface Flyable {
+    void fly();
+}
+
+// 두 번째 인터페이스
+interface Swimmable {
+    void swim();
+}
+
+// 여러 인터페이스를 구현하는 클래스
+class Duck implements Flyable, Swimmable {
+    // Flyable 인터페이스의 메서드 구현
+    public void fly() {
+        System.out.println("오리가 날아갑니다.");
+    }
+
+    // Swimmable 인터페이스의 메서드 구현
+    public void swim() {
+        System.out.println("오리가 물에서 헤엄칩니다.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Duck duck = new Duck();
+        duck.fly();  // 출력: 오리가 날아갑니다.
+        duck.swim(); // 출력: 오리가 물에서 헤엄칩니다.
+    }
+}
+</textarea
+    >
+    <p>
+      이처럼 인터페이스는 구현 코드나 멤버 변수를 가지지 않기 때문에 여러 개를
+      동시에 구현할 수 있다.
+    </p>
+    <br />
+
+    <h3>인터페이스 간 상속 예제</h3>
+
+    <p>
+      인터페이스도 다른 인터페이스를 상속받을 수 있음. 이를 통해 상위
+      인터페이스의 메서드를 하위 인터페이스가 물려받아 확장할 수 있음. 상속받은
+      인터페이스를 구현하는 클래스는 모든 상위 인터페이스의 메서드를 구현해야
+      함.
+    </p>
+
+    <h4>예제 코드:</h4>
+
+    <textarea class="javaCode" readonly>
+// 상위 인터페이스
+interface Animal {
+    void eat();
+}
+
+// 하위 인터페이스 (Animal을 상속)
+interface Bird extends Animal {
+    void fly();
+}
+
+// Bird 인터페이스를 구현하는 클래스
+class Sparrow implements Bird {
+    // Animal 인터페이스의 메서드 구현
+    public void eat() {
+        System.out.println("참새가 먹이를 먹습니다.");
+    }
+
+    // Bird 인터페이스의 메서드 구현
+    public void fly() {
+        System.out.println("참새가 날아갑니다.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Sparrow sparrow = new Sparrow();
+        sparrow.eat();  // 출력: 참새가 먹이를 먹습니다.
+        sparrow.fly();  // 출력: 참새가 날아갑니다.
+    }
+}
+    </textarea>
+
+    <br />
+
+    <h3>인터페이스 구현과 클래스 상속을 한 번에 하는 예제</h3>
+
+    <p>
+      클래스는 다른 클래스를 상속받으면서 동시에 여러 인터페이스를 구현할 수
+      있음. 상속을 통해 클래스의 기능을 확장하고, 인터페이스를 통해 특정 동작을
+      강제할 수 있음. 자바에서는 클래스 상속은 하나만 가능하지만, 여러
+      인터페이스는 동시에 구현할 수 있음.
+    </p>
+
+    <h4>예제 코드:</h4>
+
+    <textarea class="javaCode" readonly>
+// 부모 클래스
+class Animal {
+    public void sleep() {
+        System.out.println("동물이 잠을 잡니다.");
+    }
+}
+
+// 첫 번째 인터페이스
+interface Flyable {
+    void fly();
+}
+
+// 두 번째 인터페이스
+interface Swimmable {
+    void swim();
+}
+
+// 클래스 상속과 인터페이스 구현을 동시에 하는 클래스
+class Duck extends Animal implements Flyable, Swimmable {
+    // Flyable 인터페이스의 메서드 구현
+    public void fly() {
+        System.out.println("오리가 날아갑니다.");
+    }
+
+    // Swimmable 인터페이스의 메서드 구현
+    public void swim() {
+        System.out.println("오리가 물에서 헤엄칩니다.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Duck duck = new Duck();
+        duck.sleep();  // 부모 클래스 Animal의 메서드
+        duck.fly();    // Flyable 인터페이스의 메서드
+        duck.swim();   // Swimmable 인터페이스의 메서드
+    }
+}
+    </textarea>
+
+    <br />
+
+    <h3>클래스, 추상 클래스, 인터페이스의 차이점</h3>
     <table>
       <thead>
         <tr>
@@ -949,6 +1504,1044 @@ if (animal instanceof Dog) {
         </tr>
       </tbody>
     </table>
+
+    <br />
+
+    <h2>Object 클래스</h2>
+
+    <p>
+      <strong>Object 클래스</strong>는 자바의 모든 클래스가 자동으로 상속받는
+      최상위 부모 클래스임. 자바의 모든 클래스는 Object 클래스를 상속받아, 이
+      클래스의 메서드들을 사용할 수 있음.
+    </p>
+
+    <p>
+      Object 클래스는 객체의 기본적인 동작을 정의하는 여러 메서드를 제공함. 주요
+      메서드로는 다음과 같은 것들이 있음:
+    </p>
+
+    <ul>
+      <li><strong>toString():</strong> 객체의 문자열 표현을 반환</li>
+      <li><strong>equals(Object obj):</strong> 두 객체가 같은지 비교</li>
+      <li><strong>hashCode():</strong> 객체의 해시 코드를 반환</li>
+      <li><strong>clone():</strong> 객체를 복제 (얕은 복사)</li>
+      <li><strong>getClass():</strong> 객체의 클래스 정보를 반환</li>
+      <li>
+        <strong>finalize():</strong> 객체가 가비지 컬렉션될 때 호출됨 (잘
+        사용되지 않음)
+      </li>
+    </ul>
+
+    <p>
+      Object 클래스는 자바에서 객체의 기본 동작을 정의하고, 다른 클래스들이 이를
+      상속받아 객체 간의 비교, 문자열 변환 등을 쉽게 구현할 수 있도록 해줌.
+    </p>
+
+    <br />
+
+    <h3>String 클래스</h3>
+    <p>
+      <strong>String</strong> 클래스는 자바에서 문자열을 다루기 위한 클래스임.
+      문자열은 불변(immutable) 객체로, 한 번 생성되면 그 값을 변경할 수 없음.
+      문자열을 수정하면 새로운 문자열 객체가 생성되며, 기존 문자열은 변경되지
+      않음.
+    </p>
+
+    <p>주요 특징:</p>
+    <ul>
+      <li>문자열 리터럴은 상수 풀에 저장되어 메모리 효율을 높임.</li>
+      <li>
+        문자열을 연결하거나 수정할 때 새로운 객체가 생성되므로, 문자열 수정
+        작업이 많은 경우 <strong>StringBuilder</strong> 또는
+        <strong>StringBuffer</strong> 사용을 권장.
+      </li>
+      <li>다양한 문자열 처리 메서드를 제공함.</li>
+    </ul>
+
+    <h4>주요 메서드:</h4>
+    <ul>
+      <li><strong>length():</strong> 문자열의 길이를 반환</li>
+      <li><strong>charAt(int index):</strong> 특정 인덱스의 문자를 반환</li>
+      <li>
+        <strong>substring(int beginIndex, int endIndex):</strong> 지정된 범위의
+        문자열을 반환
+      </li>
+      <li>
+        <strong>indexOf(String str):</strong> 특정 문자열의 첫 번째 인덱스를
+        반환
+      </li>
+      <li>
+        <strong>replace(String oldStr, String newStr):</strong> 특정 문자열을
+        다른 문자열로 대체
+      </li>
+      <li><strong>toLowerCase():</strong> 문자열을 소문자로 변환</li>
+      <li><strong>toUpperCase():</strong> 문자열을 대문자로 변환</li>
+      <li><strong>trim():</strong> 문자열의 양쪽 공백을 제거</li>
+    </ul>
+
+    <h4>예제:</h4>
+
+    <textarea class="javaCode" readonly>
+public class Main {
+    public static void main(String[] args) {
+        // 문자열 생성
+        String str = "Hello, World";
+
+        // 문자열 길이
+        System.out.println("길이: " + str.length()); // 출력: 길이: 12
+
+        // 특정 문자 추출
+        System.out.println("문자: " + str.charAt(7)); // 출력: 문자: W
+
+        // 문자열 부분 추출
+        System.out.println("부분 문자열: " + str.substring(0, 5)); // 출력: 부분 문자열: Hello
+
+        // 문자열 대체
+        String replaced = str.replace("World", "Java");
+        System.out.println("대체된 문자열: " + replaced); // 출력: 대체된 문자열: Hello, Java
+
+        // 문자열 대문자 변환
+        System.out.println("대문자 변환: " + str.toUpperCase()); // 출력: 대문자 변환: HELLO, WORLD
+    }
+}
+    </textarea>
+
+    <p>출력 결과:</p>
+    <ul>
+      <li>길이: 12</li>
+      <li>문자: W</li>
+      <li>부분 문자열: Hello</li>
+      <li>대체된 문자열: Hello, Java</li>
+      <li>대문자 변환: HELLO, WORLD</li>
+    </ul>
+
+    <p>
+      String 클래스는 불변 객체이기 때문에 문자열 수정 작업이 적은 경우에
+      적합하며, 자바의 기본적인 문자열 처리를 위한 다양한 기능을 제공함.
+    </p>
+
+    <br />
+
+    <h3>StringBuilder</h3>
+
+    <p>
+      <strong>StringBuilder</strong>는 자바에서 문자열을 효율적으로 처리하기
+      위해 사용되는 클래스임. 문자열은 불변(immutable)한 특성을 가지기 때문에,
+      문자열을 반복적으로 변경할 때 String 클래스를 사용하면 새로운 객체가
+      계속해서 생성되어 메모리 낭비가 발생할 수 있음. StringBuilder는 이러한
+      문제를 해결하기 위해 가변(mutable)한 문자열을 제공함.
+    </p>
+
+    <p>StringBuilder의 주요 특징:</p>
+    <ul>
+      <li>
+        문자열을 변경할 수 있으며, 문자열을 추가하거나 수정할 때 새로운 객체를
+        생성하지 않음.
+      </li>
+      <li>
+        빠른 성능을 제공하며, 특히 문자열을 반복적으로 추가, 수정, 삭제하는 경우
+        유용함.
+      </li>
+      <li>스레드 안전하지 않음. (멀티스레드 환경에서는 StringBuffer를 사용)</li>
+    </ul>
+
+    <h4>예제:</h4>
+
+    <textarea class="javaCode" readonly>
+public class Main {
+    public static void main(String[] args) {
+        // StringBuilder 객체 생성
+        StringBuilder sb = new StringBuilder("Hello");
+
+        // 문자열 추가
+        sb.append(" World");
+        System.out.println(sb.toString()); // 출력: Hello World
+
+        // 문자열 삽입
+        sb.insert(5, ",");
+        System.out.println(sb.toString()); // 출력: Hello, World
+
+        // 문자열 삭제
+        sb.delete(5, 6);
+        System.out.println(sb.toString()); // 출력: Hello World
+
+        // 문자열 반전
+        sb.reverse();
+        System.out.println(sb.toString()); // 출력: dlroW olleH
+    }
+}
+    </textarea>
+
+    <p>출력 결과:</p>
+    <ul>
+      <li>Hello World</li>
+      <li>Hello, World</li>
+      <li>Hello World</li>
+      <li>dlroW olleH</li>
+    </ul>
+
+    <p>
+      <strong>StringBuilder</strong>는 문자열을 자주 수정해야 하는 경우, 특히
+      성능이 중요한 상황에서 매우 유용한 클래스임.
+    </p>
+
+    <br />
+
+    <h3>Wrapper 클래스</h3>
+
+    <p>
+      <strong>Wrapper 클래스</strong>는 기본 자료형(primitive type)을 객체로
+      감싸서 다룰 수 있도록 해주는 클래스임. 자바는 기본 자료형(int, double,
+      boolean 등)을 객체로 다룰 필요가 있을 때, 해당 기본형을 감싸는 Wrapper
+      클래스를 제공함.
+    </p>
+
+    <p>주요 Wrapper 클래스:</p>
+    <ul>
+      <li><strong>int → Integer</strong></li>
+      <li><strong>char → Character</strong></li>
+      <li><strong>double → Double</strong></li>
+      <li><strong>boolean → Boolean</strong></li>
+      <li>기타 기본형도 해당하는 Wrapper 클래스를 가짐</li>
+    </ul>
+
+    <p>
+      Wrapper 클래스는 <strong>Auto-boxing</strong>과
+      <strong>Unboxing</strong> 기능을 지원하여, 기본 자료형과 객체형을 자동으로
+      변환해줌.
+    </p>
+
+    <h4>Auto-boxing과 Unboxing 예제:</h4>
+
+    <textarea class="javaCode" readonly>
+// Auto-boxing: 기본형을 객체형으로 자동 변환
+int num = 10;
+Integer wrappedNum = num; // int -> Integer 자동 변환
+
+// Unboxing: 객체형을 기본형으로 자동 변환
+Integer objNum = 20;
+int unboxedNum = objNum; // Integer -> int 자동 변환
+</textarea
+    >
+
+    <p>
+      Wrapper 클래스의 주요 메서드는 기본형의 값을 객체로 다루고, 문자열을
+      기본형으로 변환하는 등의 작업에 유용함.
+    </p>
+
+    <h4>주요 메서드:</h4>
+    <ul>
+      <li><strong>parseInt(String s):</strong> 문자열을 int로 변환</li>
+      <li>
+        <strong>valueOf(String s):</strong> 문자열을 해당 Wrapper 타입 객체로
+        변환
+      </li>
+      <li>
+        <strong>intValue(), doubleValue() 등:</strong> 객체에서 기본형 값을 추출
+      </li>
+    </ul>
+
+    <h4>예제:</h4>
+
+    <textarea class="javaCode" readonly>
+public class Main {
+    public static void main(String[] args) {
+        // 문자열을 int로 변환
+        int num = Integer.parseInt("123");
+        System.out.println(num); // 출력: 123
+
+        // Integer 객체 생성
+        Integer objNum = Integer.valueOf(456);
+        System.out.println(objNum); // 출력: 456
+
+        // 객체에서 기본형 값 추출
+        int extractedNum = objNum.intValue();
+        System.out.println(extractedNum); // 출력: 456
+    }
+}
+    </textarea>
+
+    <p>출력 결과:</p>
+    <ul>
+      <li>123</li>
+      <li>456</li>
+      <li>456</li>
+    </ul>
+
+    <p>
+      Wrapper 클래스는 기본형을 객체로 다루어야 하는 상황에서 유용하며, 특히
+      컬렉션에서 기본형을 사용할 수 없기 때문에 자주 활용됨.
+    </p>
+
+    <br />
+
+    <h2>Class 클래스</h2>
+    <p>
+      자바의 모든 클래스와 인터페이스는 컴파일 되고 나면 class 파일로 생성됨.<br />
+      ex) a.java 파일이 컴파일되면 a.class 파일이 생성되고 이 class 파일에는
+      클래스나 인터페이스에 대한 변수, 메서드, 생성자 등의 정보가 들어있다.<br />
+      Class 클래스는 컴파일된 class 파일에 저장된 클래스나 인터페이스 정보를
+      가져오는 데 사용함.
+    </p>
+    <p>주요 특징:</p>
+    <ul>
+      <li>모든 자바 클래스는 런타임에 <strong>Class</strong> 객체로 표현됨.</li>
+      <li>
+        Reflection API를 통해 <strong>Class</strong> 객체를 사용하여 클래스의
+        구조를 분석하고, 동적으로 객체를 생성하거나 메서드를 호출할 수 있음.
+      </li>
+      <li>
+        <strong>getClass()</strong> 메서드를 통해 객체의
+        <strong>Class</strong> 객체를 얻을 수 있음.
+      </li>
+      <li>
+        <strong>forName()</strong> 메서드를 통해 클래스 이름으로
+        <strong>Class</strong> 객체를 동적으로 로드 가능.
+      </li>
+    </ul>
+
+    <h4>주요 메서드:</h4>
+    <ul>
+      <li><strong>getName():</strong> 클래스의 이름을 반환</li>
+      <li>
+        <strong>getDeclaredMethods():</strong> 클래스에 선언된 모든 메서드
+        정보를 반환
+      </li>
+      <li>
+        <strong>getDeclaredFields():</strong> 클래스에 선언된 모든 필드 정보를
+        반환
+      </li>
+      <li><strong>newInstance():</strong> 클래스의 새로운 인스턴스를 생성</li>
+      <li>
+        <strong>forName(String className):</strong> 클래스 이름으로
+        <strong>Class</strong> 객체를 얻음
+      </li>
+    </ul>
+
+    <h4>예제:</h4>
+
+    <textarea class="javaCode" readonly>
+public class Main {
+    public static void main(String[] args) throws Exception {
+        // 객체로부터 Class 객체 얻기
+        String str = "Hello";
+        Class<?> strClass = str.getClass();
+        System.out.println("클래스 이름: " + strClass.getName()); // 출력: 클래스 이름: java.lang.String
+
+        // 클래스 이름으로 Class 객체 얻기
+        Class<?> intClass = Class.forName("java.lang.Integer");
+        System.out.println("클래스 이름: " + intClass.getName()); // 출력: 클래스 이름: java.lang.Integer
+
+        // 새로운 인스턴스 생성
+        Class<?> personClass = Class.forName("Person");
+        Object personInstance = personClass.newInstance(); // Person 객체 생성
+    }
+}
+    </textarea>
+
+    <p>출력 결과:</p>
+    <ul>
+      <li>클래스 이름: java.lang.String</li>
+      <li>클래스 이름: java.lang.Integer</li>
+    </ul>
+
+    <p>
+      <strong>Class</strong> 클래스는 자바의 Reflection API와 밀접하게 연관되어
+      있으며, 동적으로 클래스와 객체를 다루고 싶을 때 매우 유용함.
+    </p>
+
+    <br />
+
+    <h2>컬렉션 프레임워크의 제네릭</h2>
+
+    <p>
+      자바의 <strong>컬렉션 프레임워크(Collection Framework)</strong>는 데이터를
+      저장하고 관리하는 자료구조의 집합으로, 리스트(List), 집합(Set), 맵(Map)
+      등의 다양한 자료구조를 제공함. 이러한 컬렉션은 다양한 타입의 데이터를
+      저장할 수 있는데, 이때 타입의 안전성을 보장하고 코드 재사용성을 높이기
+      위해 <strong>제네릭(Generics)</strong>을 사용함.
+    </p>
+
+    <h3>제네릭이란?</h3>
+    <p>
+      <strong>제네릭</strong>은 데이터 타입을 일반화하여, 하나의 클래스나
+      메서드가 다양한 타입의 데이터를 처리할 수 있도록 하는 기능임. 이를 통해
+      코드의 타입 안정성을 높이고, 타입 변환(casting)을 줄일 수 있음.
+    </p>
+
+    <h4>제네릭을 사용하는 이유:</h4>
+    <ul>
+      <li>타입 안정성: 컴파일 시점에 타입 오류를 잡을 수 있음.</li>
+      <li>
+        타입 변환 제거: 데이터 타입을 명확하게 지정해주므로 불필요한 타입 변환이
+        필요 없음.
+      </li>
+      <li>코드 재사용성: 다양한 타입에 대해 동일한 코드를 작성할 수 있음.</li>
+    </ul>
+
+    <h4>예제:</h4>
+
+    <textarea class="javaCode" readonly>
+// ArrayList에 제네릭을 사용한 예제
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        // 제네릭을 사용하여 문자열(String)만 저장할 수 있는 ArrayList 생성
+        ArrayList<String> list = new ArrayList<>();
+
+        // 문자열 추가
+        list.add("Hello");
+        list.add("World");
+
+        // 리스트의 첫 번째 요소 출력
+        String firstElement = list.get(0); // 타입 변환 없이 사용 가능
+        System.out.println(firstElement); // 출력: Hello
+
+        // 만약 제네릭을 사용하지 않는다면, Object 타입으로 저장되어 타입 변환이 필요
+        ArrayList nonGenericList = new ArrayList();
+        nonGenericList.add("Hello");
+        String str = (String) nonGenericList.get(0); // 타입 변환 필요
+    }
+}
+    </textarea>
+
+    <p>출력 결과:</p>
+    <ul>
+      <li>Hello</li>
+    </ul>
+
+    <p>
+      제네릭을 사용하면 코드의 가독성을 높이고, 타입 안정성을 보장하며, 타입
+      변환을 줄일 수 있어 더욱 안전하고 효율적인 프로그래밍이 가능함.
+    </p>
+
+    <br />
+
+    <h3>&lt;T extends 클래스&gt; 제네릭 타입 제한</h3>
+
+    <p>
+      제네릭을 사용할 때, 특정 클래스나 인터페이스를 상속받은 자료형만 사용할 수
+      있도록 제한할 수 있음. 이때
+      <strong>&lt;T extends 클래스&gt;</strong> 구문을 사용하여 제네릭 타입
+      <strong>T</strong>에 사용할 수 있는 자료형을 제한함. 이는 주로 상위
+      클래스나 인터페이스에서 제공하는 기능을 제네릭 타입에서 사용하고자 할 때
+      유용함.
+    </p>
+
+    <p>
+      <strong>&lt;T extends 클래스&gt;</strong>는 해당 클래스 또는 그 하위
+      클래스만 제네릭 타입으로 사용할 수 있다는 의미임. 예를 들어,
+      <strong>&lt;T extends Number&gt;</strong>를 사용하면
+      <strong>Number</strong> 클래스의 서브 클래스들(예:
+      <strong>Integer, Double, Float</strong> 등)만 제네릭 타입으로 허용함.
+    </p>
+
+    <h4>예제:</h4>
+
+    <textarea class="javaCode" readonly>
+// 제네릭 타입 T는 Number 클래스를 상속한 자료형으로 제한
+class Calculator<T extends Number> {
+    private T num1;
+    private T num2;
+
+    public Calculator(T num1, T num2) {
+        this.num1 = num1;
+        this.num2 = num2;
+    }
+
+    // 두 숫자를 더하는 메서드
+    public double add() {
+        return num1.doubleValue() + num2.doubleValue();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Integer 타입을 사용한 Calculator 객체
+        Calculator<Integer> intCalc = new Calculator<>(10, 20);
+        System.out.println("Integer 합: " + intCalc.add()); // 출력: Integer 합: 30.0
+
+        // Double 타입을 사용한 Calculator 객체
+        Calculator<Double> doubleCalc = new Calculator<>(15.5, 10.2);
+        System.out.println("Double 합: " + doubleCalc.add()); // 출력: Double 합: 25.7
+
+        // String 타입은 사용 불가 (컴파일 오류 발생)
+        // Calculator<String> stringCalc = new Calculator<>("10", "20");
+    }
+}
+    </textarea>
+
+    <p>출력 결과:</p>
+    <ul>
+      <li>Integer 합: 30.0</li>
+      <li>Double 합: 25.7</li>
+    </ul>
+
+    <p>
+      이처럼 <strong>&lt;T extends 클래스&gt;</strong> 구문을 사용하여 제네릭
+      타입으로 사용할 수 있는 자료형을 제한할 수 있으며, 이를 통해 특정 클래스나
+      인터페이스의 기능을 제네릭 클래스에서도 안전하게 사용할 수 있음.
+    </p>
+
+    <br />
+
+    <h3>컬렉션 프레임워크 (Collection Framework)</h3>
+
+    <p>
+      자바의 <strong>컬렉션 프레임워크</strong>는 데이터를 효율적으로 저장하고,
+      검색하고, 관리할 수 있도록 돕는 표준화된 자료구조의 집합임. 여러 종류의
+      컬렉션(리스트, 집합, 맵 등)을 제공하여, 다양한 방식으로 데이터를 저장하고
+      처리할 수 있음.
+    </p>
+
+    <h4>컬렉션 프레임워크의 주요 인터페이스:</h4>
+    <ul>
+      <li>
+        <strong>List:</strong> 순서가 있는 데이터의 집합으로, 중복된 요소를
+        허용함. (예: ArrayList, LinkedList)
+      </li>
+      <li>
+        <strong>Set:</strong> 중복을 허용하지 않는 데이터의 집합으로, 순서가
+        없음. (예: HashSet, TreeSet)
+      </li>
+      <li>
+        <strong>Map:</strong> 키와 값의 쌍으로 데이터를 저장하며, 키는 중복을
+        허용하지 않음. (예: HashMap, TreeMap)
+      </li>
+    </ul>
+
+    <h4>컬렉션 프레임워크의 주요 특징:</h4>
+    <ul>
+      <li>
+        다양한 자료구조 제공: 데이터를 저장, 검색, 삭제, 수정하는 데 적합한 여러
+        컬렉션 클래스 제공.
+      </li>
+      <li>
+        인터페이스 기반: List, Set, Map 등의 인터페이스를 구현한 다양한 컬렉션
+        클래스 사용 가능.
+      </li>
+      <li>
+        제네릭 지원: 컬렉션에 저장되는 데이터 타입을 제네릭으로 지정하여 타입
+        안정성 보장.
+      </li>
+    </ul>
+
+    <h4>주요 컬렉션 클래스:</h4>
+    <ul>
+      <li>
+        <strong>ArrayList:</strong> 크기가 가변적인 배열로 데이터를 저장하며,
+        리스트 구조를 가짐. 데이터의 삽입, 삭제가 빠름.
+      </li>
+      <li>
+        <strong>HashSet:</strong> 순서 없이 중복되지 않는 데이터를 저장하는
+        집합.
+      </li>
+      <li>
+        <strong>HashMap:</strong> 키-값 쌍으로 데이터를 저장하며, 키는 중복되지
+        않음.
+      </li>
+    </ul>
+
+    <h4>예제:</h4>
+
+    <textarea class="javaCode" readonly>
+// ArrayList 사용 예제
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        // ArrayList 생성
+        ArrayList<String> list = new ArrayList<>();
+
+        // 데이터 추가
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Cherry");
+
+        // 데이터 출력
+        for (String fruit : list) {
+            System.out.println(fruit);
+        }
+    }
+}
+    </textarea>
+
+    <p>출력 결과:</p>
+    <ul>
+      <li>Apple</li>
+      <li>Banana</li>
+      <li>Cherry</li>
+    </ul>
+
+    <p>
+      자바의 컬렉션 프레임워크는 다양한 자료구조를 제공하며, 데이터를 효율적으로
+      처리하고 관리할 수 있는 강력한 도구임.
+    </p>
+
+    <br />
+
+    <h3>List 인터페이스</h3>
+
+    <p>
+      <strong>List</strong> 인터페이스는 자바의 컬렉션 프레임워크 중 하나로,
+      순서가 있는 데이터의 집합을 나타냄. <strong>List</strong>는 데이터의
+      중복을 허용하며, 데이터가 삽입된 순서대로 저장됨.
+      <strong>List</strong> 인터페이스를 구현한 대표적인 클래스에는
+      <strong>ArrayList</strong>, <strong>LinkedList</strong> 등이 있음.
+    </p>
+
+    <h4>List 인터페이스의 주요 특징:</h4>
+    <ul>
+      <li>순서가 있는 데이터 저장</li>
+      <li>데이터의 중복 허용</li>
+      <li>인덱스를 사용해 요소에 접근 가능</li>
+      <li>데이터 삽입, 삭제, 검색에 유용</li>
+    </ul>
+
+    <h4>주요 메서드:</h4>
+    <ul>
+      <li><strong>add(E e):</strong> 리스트의 끝에 요소를 추가</li>
+      <li>
+        <strong>get(int index):</strong> 인덱스를 사용해 특정 위치의 요소를 반환
+      </li>
+      <li>
+        <strong>remove(int index):</strong> 인덱스를 사용해 특정 위치의 요소를
+        제거
+      </li>
+      <li><strong>size():</strong> 리스트에 저장된 요소의 개수를 반환</li>
+      <li>
+        <strong>contains(Object o):</strong> 리스트에 특정 요소가 포함되어
+        있는지 확인
+      </li>
+    </ul>
+
+    <h4>List 인터페이스의 구현 클래스</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>구현 클래스</th>
+          <th>설명</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>ArrayList</strong></td>
+          <td>
+            동적 배열을 사용한 리스트 구현. 데이터 접근 속도가 빠르며, 데이터
+            삽입 및 삭제는 느림.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>LinkedList</strong></td>
+          <td>
+            데이터 삽입 및 삭제가 빠른 연결 리스트 구조. 데이터 접근 속도는
+            느림.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Vector</strong></td>
+          <td>
+            ArrayList와 비슷하지만, 스레드 안전(thread-safe)하도록 설계됨.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Stack</strong></td>
+          <td>
+            LIFO(Last In First Out) 구조를 가지는 리스트. 최근에 추가된 요소를
+            먼저 처리함.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>예제:</h4>
+
+    <textarea class="javaCode" readonly>
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        // List 인터페이스를 구현한 ArrayList 사용
+        List<String> list = new ArrayList<>();
+
+        // 데이터 추가
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Cherry");
+
+        // 데이터 출력
+        for (String fruit : list) {
+            System.out.println(fruit);
+        }
+    }
+}
+    </textarea>
+
+    <p>출력 결과:</p>
+    <ul>
+      <li>Apple</li>
+      <li>Banana</li>
+      <li>Cherry</li>
+    </ul>
+
+    <p>
+      <strong>List</strong> 인터페이스는 순서가 있는 데이터를 다룰 때 유용하며,
+      다양한 구현체(ArrayList, LinkedList 등)를 통해 다양한 방식으로 데이터를
+      처리할 수 있음.
+    </p>
+
+    <br />
+
+    <h3>Set 인터페이스</h3>
+
+    <p>
+      <strong>Set</strong> 인터페이스는 자바의 컬렉션 프레임워크에서 중복되지
+      않는 요소들의 집합을 나타냄. <strong>Set</strong>은 순서를 유지하지
+      않으며, 각 요소가 유일해야 함. 주로 데이터의 중복을 허용하지 않아야 하는
+      경우 사용됨.
+    </p>
+
+    <h4>Set 인터페이스의 주요 특징:</h4>
+    <ul>
+      <li>중복 요소를 허용하지 않음</li>
+      <li>저장된 요소의 순서는 유지되지 않음</li>
+      <li>null 값을 허용 (일부 구현체는 null을 하나만 허용)</li>
+    </ul>
+
+    <h4>주요 메서드:</h4>
+    <ul>
+      <li>
+        <strong>add(E e):</strong> 요소를 집합에 추가 (중복 요소는 추가되지
+        않음)
+      </li>
+      <li><strong>remove(Object o):</strong> 특정 요소를 집합에서 제거</li>
+      <li>
+        <strong>contains(Object o):</strong> 집합에 특정 요소가 있는지 확인
+      </li>
+      <li><strong>size():</strong> 집합에 저장된 요소의 개수를 반환</li>
+    </ul>
+
+    <h4>Set 인터페이스의 구현 클래스</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>구현 클래스</th>
+          <th>설명</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>HashSet</strong></td>
+          <td>
+            해시 알고리즘을 사용하여 데이터를 저장하는 집합. 순서를 유지하지
+            않으며, 중복을 허용하지 않음.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>LinkedHashSet</strong></td>
+          <td>HashSet과 유사하지만, 요소가 추가된 순서를 유지함.</td>
+        </tr>
+        <tr>
+          <td><strong>TreeSet</strong></td>
+          <td>
+            이진 트리를 기반으로 요소를 정렬하여 저장하는 집합. 자동으로 정렬된
+            순서로 저장됨.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>예제:</h4>
+
+    <textarea class="javaCode" readonly>
+import java.util.HashSet;
+import java.util.Set;
+
+public class Main {
+    public static void main(String[] args) {
+        // Set 인터페이스를 구현한 HashSet 사용
+        Set<String> set = new HashSet<>();
+
+        // 데이터 추가 (중복되지 않는 값만 저장됨)
+        set.add("Apple");
+        set.add("Banana");
+        set.add("Apple"); // 중복된 값 추가 시 무시됨
+
+        // 데이터 출력
+        for (String fruit : set) {
+            System.out.println(fruit);
+        }
+    }
+}
+    </textarea>
+
+    <p>출력 결과:</p>
+    <ul>
+      <li>Banana</li>
+      <li>Apple</li>
+    </ul>
+
+    <p>
+      <strong>Set</strong> 인터페이스는 중복을 허용하지 않는 데이터 집합을 다룰
+      때 유용하며, 순서가 중요하지 않은 데이터를 처리하거나 중복 데이터를 제거할
+      때 자주 사용됨.
+    </p>
+
+    <br />
+
+    <h3>Map 인터페이스</h3>
+
+    <p>
+      <strong>Map</strong> 인터페이스는 자바의 컬렉션 프레임워크에서 키-값
+      쌍으로 데이터를 저장하는 자료구조를 나타냄. 각 키는 유일하며, 중복을
+      허용하지 않음. 하나의 키는 하나의 값과 연결되며, 키를 통해 값을 빠르게
+      검색할 수 있음.
+    </p>
+
+    <h4>Map 인터페이스의 주요 특징:</h4>
+    <ul>
+      <li>키는 중복을 허용하지 않으며, 각 키는 하나의 값과 연결됨.</li>
+      <li>값은 중복될 수 있음.</li>
+      <li>키를 이용하여 값을 검색, 추가, 삭제할 수 있음.</li>
+    </ul>
+
+    <h4>주요 메서드:</h4>
+    <ul>
+      <li><strong>put(K key, V value):</strong> 맵에 키-값 쌍을 추가</li>
+      <li><strong>get(Object key):</strong> 특정 키에 해당하는 값을 반환</li>
+      <li>
+        <strong>remove(Object key):</strong> 특정 키와 그에 해당하는 값을 맵에서
+        제거
+      </li>
+      <li>
+        <strong>containsKey(Object key):</strong> 맵에 특정 키가 포함되어 있는지
+        확인
+      </li>
+      <li><strong>keySet():</strong> 맵에 있는 모든 키를 반환</li>
+      <li><strong>values():</strong> 맵에 있는 모든 값을 반환</li>
+    </ul>
+
+    <h4>Map 인터페이스의 구현 클래스</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>구현 클래스</th>
+          <th>설명</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>HashMap</strong></td>
+          <td>
+            해시 테이블을 사용하여 데이터를 저장하는 맵. 순서를 유지하지 않으며,
+            null 키와 값을 허용.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>LinkedHashMap</strong></td>
+          <td>HashMap과 유사하지만, 입력된 순서를 유지함.</td>
+        </tr>
+        <tr>
+          <td><strong>TreeMap</strong></td>
+          <td>
+            키를 정렬하여 저장하는 이진 트리 기반의 맵. 자동으로 정렬된 키
+            순서로 저장됨.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>예제:</h4>
+
+    <textarea class="javaCode" readonly>
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+    public static void main(String[] args) {
+        // Map 인터페이스를 구현한 HashMap 사용
+        Map<String, Integer> map = new HashMap<>();
+
+        // 데이터 추가
+        map.put("Apple", 3);
+        map.put("Banana", 2);
+        map.put("Cherry", 5);
+
+        // 데이터 출력
+        for (String key : map.keySet()) {
+            System.out.println(key + " : " + map.get(key));
+        }
+    }
+}
+    </textarea>
+
+    <p>출력 결과:</p>
+    <ul>
+      <li>Apple : 3</li>
+      <li>Banana : 2</li>
+      <li>Cherry : 5</li>
+    </ul>
+
+    <p>
+      <strong>Map</strong> 인터페이스는 키-값 쌍으로 데이터를 관리할 때 매우
+      유용하며, 특히 데이터베이스와 같은 키-값 기반의 자료구조에서 자주 사용됨.
+    </p>
+
+    <br />
+
+    <h3>내부 클래스 (Inner Class)</h3>
+
+    <p>
+      <strong>내부 클래스</strong>는 클래스 안에 정의된 또 다른 클래스로, 외부
+      클래스와 밀접한 관계를 가짐. 내부 클래스는 외부 클래스의 멤버(변수나
+      메서드)에 쉽게 접근할 수 있으며, 관련된 기능을 하나의 클래스 안에 묶어
+      코드의 가독성을 높이고, 구조를 단순하게 유지할 수 있음.
+    </p>
+
+    <h4>내부 클래스의 종류:</h4>
+
+    <table>
+      <thead>
+        <tr>
+          <th>종류</th>
+          <th>설명</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>인스턴스 내부 클래스</strong></td>
+          <td>
+            외부 클래스의 인스턴스 변수처럼 사용되며, 외부 클래스의 인스턴스가
+            있어야 생성 가능
+          </td>
+        </tr>
+        <tr>
+          <td><strong>정적 내부 클래스</strong></td>
+          <td>외부 클래스의 인스턴스 없이도 사용할 수 있는 내부 클래스</td>
+        </tr>
+        <tr>
+          <td><strong>지역 내부 클래스</strong></td>
+          <td>메서드나 블록 안에서 정의된 클래스</td>
+        </tr>
+        <tr>
+          <td><strong>익명 내부 클래스</strong></td>
+          <td>
+            이름이 없는 일회성 클래스이며, 인터페이스나 추상 클래스의 메서드를
+            구현할 때 주로 사용
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>예제:</h4>
+
+    <textarea class="javaCode" readonly>
+// 1. 인스턴스 내부 클래스 예제
+public class OuterClass {
+    private String outerField = "외부 클래스 필드";
+
+    // 인스턴스 내부 클래스
+    public class InnerClass {
+        public void display() {
+            System.out.println("내부 클래스에서 외부 필드 접근: " + outerField);
+        }
+    }
+
+    public static void main(String[] args) {
+        // 외부 클래스의 인스턴스 생성
+        OuterClass outer = new OuterClass();
+
+        // 내부 클래스의 인스턴스 생성
+        OuterClass.InnerClass inner = outer.new InnerClass();
+
+        // 내부 클래스 메서드 호출
+        inner.display();
+    }
+}
+</textarea
+    >
+
+    <textarea class="javaCode" readonly>
+// 2. 정적 내부 클래스 예제
+public class OuterClass {
+    private static String staticField = "정적 외부 필드";
+
+    // 정적 내부 클래스
+    public static class StaticInnerClass {
+        public void display() {
+            System.out.println("정적 내부 클래스에서 정적 필드 접근: " + staticField);
+        }
+    }
+
+    public static void main(String[] args) {
+        // 정적 내부 클래스의 인스턴스 생성
+        OuterClass.StaticInnerClass inner = new OuterClass.StaticInnerClass();
+
+        // 정적 내부 클래스 메서드 호출
+        inner.display();
+    }
+}
+</textarea
+    >
+
+    <textarea class="javaCode" readonly>
+// 3. 지역 내부 클래스 예제
+public class OuterClass {
+    public void createLocalClass() {
+        // 지역 내부 클래스
+        class LocalClass {
+            public void printMessage() {
+                System.out.println("지역 내부 클래스 호출");
+            }
+        }
+
+        // 지역 내부 클래스 인스턴스 생성
+        LocalClass local = new LocalClass();
+        local.printMessage();
+    }
+
+    public static void main(String[] args) {
+        OuterClass outer = new OuterClass();
+        outer.createLocalClass();
+    }
+}
+</textarea
+    >
+
+    <textarea class="javaCode" readonly>
+// 4. 익명 내부 클래스 예제
+public class Main {
+    public static void main(String[] args) {
+        // 익명 내부 클래스를 사용하여 Runnable 인터페이스 구현
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("익명 내부 클래스 실행");
+            }
+        };
+
+        // 스레드에 익명 내부 클래스 전달하여 실행
+        Thread thread = new Thread(runnable);
+        thread.start();
+    }
+}
+    </textarea>
+
+    <p>출력 결과:</p>
+    <ul>
+      <li>내부 클래스에서 외부 필드 접근: 외부 클래스 필드</li>
+      <li>정적 내부 클래스에서 정적 필드 접근: 정적 외부 필드</li>
+      <li>지역 내부 클래스 호출</li>
+      <li>익명 내부 클래스 실행</li>
+    </ul>
+
+    <p>
+      내부 클래스는 외부 클래스와 밀접한 관계를 맺고 있어, 외부 클래스의 멤버에
+      쉽게 접근할 수 있음. 코드의 응집도를 높이고, 관련 기능을 하나의 클래스로
+      묶어 간결하게 작성할 수 있음.
+    </p>
 
     <br />
 
@@ -998,6 +2591,65 @@ if (animal instanceof Dog) {
       </tbody>
     </table>
 
+    <br />
+
+    <h3>자바의 상수 풀 (Constant Pool)</h3>
+
+    <p>
+      자바의 <strong>상수 풀 (Constant Pool)</strong>은 자주 사용되는 문자열 및
+      기본형 데이터들이 저장되는 메모리 영역을 의미함. 특히, 문자열 상수
+      풀(String Constant Pool)은 같은 문자열 리터럴을 여러 번 생성하지 않고,
+      메모리를 효율적으로 사용하기 위해 동일한 문자열 리터럴을 공유함.
+    </p>
+
+    <p>상수 풀의 주요 특징:</p>
+    <ul>
+      <li>
+        동일한 문자열 리터럴이 여러 번 생성될 경우, 상수 풀에 이미 존재하는 값을
+        참조하여 메모리 낭비를 줄임.
+      </li>
+      <li>
+        <strong>new</strong> 키워드를 사용해 생성된 문자열 객체는 상수 풀을
+        사용하지 않고, 힙 메모리에 별도의 객체로 생성됨.
+      </li>
+      <li>기본형 데이터와 문자열 리터럴만 상수 풀에 저장됨.</li>
+    </ul>
+
+    <p>
+      상수 풀을 통해 메모리 사용을 최적화할 수 있으며, 특히 문자열 처리에서
+      효율성을 높일 수 있음.
+    </p>
+
+    <h4>예제:</h4>
+
+    <textarea class="javaCode" readonly>
+public class Main {
+    public static void main(String[] args) {
+        // 상수 풀을 사용한 문자열
+        String str1 = "Hello";
+        String str2 = "Hello";
+
+        // 힙 메모리에 생성된 문자열 객체
+        String str3 = new String("Hello");
+
+        // str1과 str2는 상수 풀을 참조하므로 같은 객체
+        System.out.println(str1 == str2); // 출력: true
+
+        // str3은 힙 메모리의 별도 객체이므로 다른 객체
+        System.out.println(str1 == str3); // 출력: false
+    }
+}
+    </textarea>
+
+    <p>출력 결과:</p>
+    <ul>
+      <li>true</li>
+      <li>false</li>
+    </ul>
+
+    <br />
+
+    <h2>시험 잘 봐보자..</h2>
     <script src="script.js"></script>
   </body>
 </html>
