@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="buttonGroup">
+      <div id="mainBtnArr">
+        <button onclick="toggleMenu()" id="menuButton"></button>
+      </div>
+      <div class="back99"></div>
+
+      <div class="controls" id="controlsMenu">
+        <button onclick="startRain()" id="rainButton"></button>
+        <button onclick="startSnow()" id="snowButton"></button>
+        <button onclick="clearWeather()" id="sunnyButton"></button>
+      </div>
+    </div>
+
+    <div class="weather" id="weather"></div>
+    <div class="main">
+      <div class="mainContent">
+        <img src="/public/zzang9Rain-removebg.png" id="zzang9" />
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap");
+
+body {
+  font-family: "Noto Sans KR", "Roboto", sans-serif;
+  background-color: #f0f2f5;
+  color: #333;
+  line-height: 1.8;
+  margin: 0;
+  padding: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+#mainBtnArr {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  border-radius: 3px;
+}
+
+#menuButton {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background-image: url("/public/sunny.png");
+  background-position: center;
+  background-size: 80%;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#menuButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+#menuButton:active {
+  transform: scale(0.95);
+}
+
+.back99 {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 101px;
+  height: 82px;
+  background-color: #f0f2f5;
+  z-index: 6;
+}
+
+.controls {
+  position: absolute;
+  top: 20px;
+  left: -170px;
+  margin: 0;
+  padding: 0;
+  width: 250px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  transition: left 0.5s ease;
+  display: flex;
+  justify-content: space-around;
+  z-index: 5;
+}
+
+.controls.open {
+  left: 90px;
+}
+
+#rainButton,
+#snowButton,
+#sunnyButton {
+  width: 60px;
+  height: 60px;
+  background-position: center;
+  background-size: 80%;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%; /* 버튼을 원형으로 만듦 */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 효과 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* 버튼 애니메이션 추가 */
+}
+
+#rainButton {
+  background-image: url("/public/rain.png");
+}
+
+#snowButton {
+  background-image: url("/public/snow.png");
+}
+
+#sunnyButton {
+  background-image: url("/public/sunny.png");
+}
+
+#rainButton:hover,
+#snowButton:hover,
+#sunnyButton:hover {
+  transform: scale(1.1); /* 마우스 올렸을 때 살짝 확대 */
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2); /* 마우스 올렸을 때 그림자 증가 */
+}
+
+#rainButton:active,
+#snowButton:active {
+  transform: scale(0.95); /* 클릭할 때 약간 축소 */
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1); /* 클릭할 때 그림자 축소 */
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
+  height: 1000px;
+}
+
+#zzang9 {
+  width: 600px;
+  height: auto;
+  border-radius: 15px;
+  object-fit: cover; /* 이미지가 컨테이너 크기에 맞게 잘리거나 확대 */
+}
+
+.weather {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* 비 */
+.drop {
+  position: absolute;
+  bottom: 100%;
+  width: 2px;
+  height: 30px;
+  background: #478abc;
+  border-radius: 20px;
+  animation: fall 1s linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+/* 눈 */
+.snowflake {
+  position: absolute;
+  top: -10px;
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+  animation: fallSnow 5s linear infinite;
+}
+
+@keyframes fallSnow {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
