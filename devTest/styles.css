@@ -29,7 +29,7 @@ body {
   position: relative;
   width: 60px;
   height: 60px;
-  background-image: url("/public/sunny.png");
+  background-image: url("/picture/sunny.png");
   background-position: center;
   background-size: 80%;
   background-repeat: no-repeat;
@@ -97,15 +97,15 @@ body {
 }
 
 #rainButton {
-  background-image: url("/public/rain.png");
+  background-image: url("/picture/rain.png");
 }
 
 #snowButton {
-  background-image: url("/public/snow.png");
+  background-image: url("/picture/snow.png");
 }
 
 #sunnyButton {
-  background-image: url("/public/sunny.png");
+  background-image: url("/picture/sunny.png");
 }
 
 #rainButton:hover,
