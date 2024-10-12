@@ -39,18 +39,18 @@ let createSnow = () => {
 function startRain() {
   clearWeather();
   createRain();
-  menuButton.style.backgroundImage = "url('/public/rain.png')"; // 비가 시작되면 버튼 배경 변경
+  menuButton.style.backgroundImage = "url('/picture/rain.png')"; // 비가 시작되면 버튼 배경 변경
 }
 
 function startSnow() {
   clearWeather();
   createSnow();
-  menuButton.style.backgroundImage = "url('/public/snow.png')"; // 눈이 시작되면 버튼 배경 변경
+  menuButton.style.backgroundImage = "url('/picture/snow.png')"; // 눈이 시작되면 버튼 배경 변경
 }
 
 function clearWeather() {
   weatherContainer.innerHTML = "";
   back99.style.backgroundColor = "#f0f2f5";
   document.body.style.backgroundColor = "#f0f2f5";
-  menuButton.style.backgroundImage = "url('/public/sunny.png')"; // 초기화하면 기본 햇빛 배경으로 변경
+  menuButton.style.backgroundImage = "url('/picture/sunny.png')"; // 초기화하면 기본 햇빛 배경으로 변경
 }
