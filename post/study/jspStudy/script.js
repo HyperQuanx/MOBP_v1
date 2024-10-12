@@ -26,6 +26,6 @@ const autoResize = (textarea) => {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  const textareas = document.querySelectorAll(".java-code");
+  const textareas = document.querySelectorAll(".javaCode");
   textareas.forEach(autoResize);
 });

@@ -73,7 +73,7 @@ caption {
   color: #2c3e50;
 }
 
-.java-code {
+.javaCode {
   font-family: Consolas, "Courier New", monospace;
   line-height: 1.8;
   background-color: #1e2a38; /* 더 어두운 배경으로 세련된 느낌 */
@@ -88,7 +88,7 @@ caption {
   transition: background-color 0.3s ease, box-shadow 0.3s ease; /* 배경색과 그림자 변화에 애니메이션 추가 */
 }
 
-.java-code:hover {
+.javaCode:hover {
   background-color: #253244; /* 호버 시 조금 더 밝은 배경 */
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강화 */
 }
@@ -108,7 +108,7 @@ textarea {
     padding: 10px;
   }
 
-  .java-code {
+  .javaCode {
     padding: 10px;
   }
 }

@@ -348,7 +348,7 @@
     <br />
 
     <h3>// DBConnPool.java</h3>
-    <textarea class="java-code" readonly>
+    <textarea class="javaCode" readonly>
 import java.sql.Connection; // DB 연결을 위한 Connection 객체 임포트
 import java.sql.PreparedStatement; // SQL 쿼리 실행을 위한 PreparedStatement 객체 임포트
 import java.sql.ResultSet; // 쿼리 결과를 저장하기 위한 ResultSet 객체 임포트
@@ -445,7 +445,7 @@ public class DBConnPool {
     <br />
 
     <h3>server.xml</h3>
-    <textarea class="java-code" readonly oninput="autoResize(this)">
+    <textarea class="javaCode" readonly oninput="autoResize(this)">
 // GlobalNamingResources를 수정
 <GlobalNamingResources>
   <Resource 
@@ -505,7 +505,7 @@ public class DBConnPool {
     <br />
 
     <h3>context.xml</h3>
-    <textarea class="java-code" readonly oninput="autoResize(this)">
+    <textarea class="javaCode" readonly oninput="autoResize(this)">
 // 그대로 추가
 // context.xml
 <ResourceLink name="jdbc_fullstack7"
@@ -527,7 +527,7 @@ type="javax.sql.DataSource"/>
     <br />
 
     <h3>web.xml에서 세션 유지 시간 설정 방법</h3>
-    <textarea class="java-code" readonly oninput="autoResize(this)">
+    <textarea class="javaCode" readonly oninput="autoResize(this)">
 // web.xml
 <session-config>
   <session-timeout>20</session-timeout>
@@ -537,7 +537,7 @@ type="javax.sql.DataSource"/>
     <br />
 
     <h3>jsp파일에서 session 내장 객체로 시간 설정</h3>
-    <textarea class="java-code" readonly oninput="autoResize(this)">
+    <textarea class="javaCode" readonly oninput="autoResize(this)">
 // web.xml과 달리 시간 단위는 초
 <%
 session.setMaxInactivateInterval(1800);
@@ -1688,7 +1688,7 @@ session.setMaxInactivateInterval(1800);
     <br />
 
     <h3>web.xml에서 매핑</h3>
-    <textarea class="java-code" readonly>
+    <textarea class="javaCode" readonly>
 // web.xml
 
 // 서블릿 등록
@@ -1712,7 +1712,7 @@ ex) http:// : 프로토콜
     <br />
 
     <h3>@WebServlet 어노테이션으로 매핑</h3>
-    <textarea class="java-code" readonly>
+    <textarea class="javaCode" readonly>
 // ServletTest.java
 
 package jsp;
@@ -1750,7 +1750,7 @@ public class ServletTest extends HttpServlet {
         서블릿 인스턴스를 생성하고 init() 메서드를 호출합니다.
       </li>
       <li><strong>예시</strong>:</li>
-      <textarea class="java-code" readonly>
+      <textarea class="javaCode" readonly>
 @Override
 public void init() throws ServletException {
     // 초기화 작업 수행
@@ -1778,7 +1778,7 @@ public void init() throws ServletException {
         호출됩니다.
       </li>
       <li><strong>예시</strong>:</li>
-      <textarea class="java-code" readonly>
+      <textarea class="javaCode" readonly>
 @Override
 protected void service(HttpServletRequest req, HttpServletResponse resp) 
         throws ServletException, IOException {
@@ -1807,7 +1807,7 @@ protected void service(HttpServletRequest req, HttpServletResponse resp)
         않아 메모리에서 제거될 때 호출됩니다.
       </li>
       <li><strong>예시</strong>:</li>
-      <textarea class="java-code" readonly>
+      <textarea class="javaCode" readonly>
 @Override
 public void destroy() {
     // 종료 작업 수행
@@ -1834,7 +1834,7 @@ public void destroy() {
         메서드가 호출되기 전에 실행됩니다.
       </li>
       <li><strong>예시</strong>:</li>
-      <textarea class="java-code" readonly>
+      <textarea class="javaCode" readonly>
 import javax.annotation.PostConstruct;
 
 @PostConstruct
@@ -1863,7 +1863,7 @@ public void postConstruct() {
         실행됩니다.
       </li>
       <li><strong>예시</strong>:</li>
-      <textarea class="java-code" readonly>
+      <textarea class="javaCode" readonly>
 import javax.annotation.PreDestroy;
 
 @PreDestroy
