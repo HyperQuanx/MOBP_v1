@@ -1198,9 +1198,9 @@ public interface Calc {
 
   // 인터페이스에서 선언한 메서드는 컴파일 과정에서 추상 메서드로 변환됨
   int add(int n1, int n2);
-  int substract(int n1, int n2);
-  int times(int n1, int n2);
-  int divide(int n1, int n2);
+  int min(int n1, int n2);
+  int mul(int n1, int n2);
+  int div(int n1, int n2);
 }
 
 // Calculator.java
@@ -1214,7 +1214,7 @@ public abstract class Calculator implements Calc {
   }
 
   @Override
-  public int substract(int n1, int n2) {
+  public int min(int n1, int n2) {
     return n1 - n2;
   }
 }
@@ -1224,12 +1224,12 @@ package interfaceStudy;
 
 public class CompleteCalc extends Calculator {
   @Override
-  public int times(int n1, int n2) {
+  public int mul(int n1, int n2) {
     return n1 * n2;
   }
 
   @Override
-  public int divide(int n1, int n2) {
+  public int div(int n1, int n2) {
     if (n2 != 0) {
       return n1 / n2;
     } else {
@@ -1253,9 +1253,9 @@ public class CalcTest {
     CompleteCalc calc = new CompleteCalc();
 
     System.out.println(calc.add(a, b));
-    System.out.println(calc.substract(a, b));
-    System.out.println(calc.times(a, b));
-    System.out.println(calc.divide(a, b));
+    System.out.println(calc.min(a, b));
+    System.out.println(calc.mul(a, b));
+    System.out.println(calc.div(a, b));
     calc.showInfo();
   }
 }
