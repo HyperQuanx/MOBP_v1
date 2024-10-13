@@ -2544,6 +2544,85 @@ public class Main {
     </p>
 
     <br />
+    
+    <h3>람다식 (Lambda Expression)</h3>
+
+<p>
+  <strong>람다식</strong>은 자바 8부터 도입된 기능으로, 코드를 간결하고 직관적으로 작성할 수 있도록 도와주는 표현식임. 
+  주로 익명 함수를 간편하게 표현하기 위해 사용되며, 메서드나 인터페이스의 구현을 더 짧은 형태로 작성할 수 있음.
+</p>
+
+<h4>람다식의 기본 형태:</h4>
+<p>
+  <strong>(매개변수) -> { 실행할 코드 }</strong>
+</p>
+
+<p>간단한 예시로, 두 숫자를 더하는 함수를 람다식으로 표현하면 다음과 같음:</p>
+
+<textarea class="javaCode" readonly>
+// 일반 메서드
+public int sum(int a, int b) {
+    return a + b;
+}
+
+// 람다식으로 표현
+(int a, int b) -> { return a + b; }
+</textarea>
+
+<h4>람다식의 특징:</h4>
+<ul>
+  <li>메서드의 이름이 필요 없으며, 코드의 길이를 줄일 수 있음.</li>
+  <li>단일 명령문일 경우 중괄호 <strong>{}</strong>와 <strong>return</strong> 키워드를 생략할 수 있음.</li>
+  <li>함수형 인터페이스(메서드가 하나만 있는 인터페이스)와 함께 사용됨.</li>
+</ul>
+
+<h4>람다식 예제:</h4>
+
+<p>자바에서 자주 사용하는 <strong>Runnable</strong> 인터페이스를 람다식으로 구현:</p>
+
+<textarea class="javaCode" readonly>
+// 람다식 없이 Runnable 구현
+Runnable runnable1 = new Runnable() {
+    @Override
+    public void run() {
+        System.out.println("람다식 없이 실행");
+    }
+};
+
+// 람다식을 사용하여 Runnable 구현
+Runnable runnable2 = () -> System.out.println("람다식으로 실행");
+
+public class Main {
+    public static void main(String[] args) {
+        // 스레드에서 Runnable 실행
+        new Thread(runnable1).start();  // 출력: 람다식 없이 실행
+        new Thread(runnable2).start();  // 출력: 람다식으로 실행
+    }
+}
+</textarea>
+
+<h4>람다식으로 더 간결한 코드 작성:</h4>
+<ul>
+  <li><strong>매개변수가 하나일 때:</strong> 괄호 <strong>()</strong>를 생략할 수 있음.</li>
+  <li><strong>실행할 코드가 한 줄일 때:</strong> 중괄호 <strong>{}</strong>와 <strong>return</strong> 생략 가능.</li>
+</ul>
+
+<p>예시:</p>
+
+<textarea class="javaCode" readonly>
+// 매개변수가 하나일 때
+(str) -> System.out.println(str)
+
+// 실행 코드가 한 줄일 때
+(a, b) -> a + b
+</textarea>
+
+<p>
+  <strong>람다식</strong>은 코드를 더 간결하고 명확하게 작성할 수 있게 해주며, 반복적인 코드 작성을 줄여줌. 
+  특히 함수형 인터페이스와 함께 사용될 때 매우 유용함.
+</p>
+
+<br />
 
     <h2>메모리 공간</h2>
     <table>
@@ -2648,6 +2727,8 @@ public class Main {
     </ul>
 
     <br />
+    
+    
 
     <h2>시험 잘 봐보자..</h2>
     <script src="script.js"></script>
