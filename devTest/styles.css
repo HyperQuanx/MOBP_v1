@@ -187,3 +187,7 @@ body {
     transform: translateY(100vh) rotate(360deg);
   }
 }
+
+button {
+  caret-color: transparent;
+}
