@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Controller Table</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-family: Arial, sans-serif;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+        color: #333;
+      }
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      tr:hover {
+        background-color: #e0e0e0;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <th>기능</th>
+        <th>컨트롤러</th>
+        <th>View</th>
+        <th>요청 방식</th>
+      </tr>
+      <tr>
+        <td>목록</td>
+        <td>BbsListController</td>
+        <td>/WEB-INF/Views/bbs/list.jsp</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>등록 - 입력</td>
+        <td>BbsRegistController</td>
+        <td>/WEB-INF/Views/bbs/regist.jsp</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>등록 - 처리</td>
+        <td>BbsRegistController</td>
+        <td>Redirect</td>
+        <td>POST</td>
+      </tr>
+      <tr>
+        <td>조회</td>
+        <td>BbsViewController</td>
+        <td>/WEB-INF/Views/bbs/view.jsp</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>수정 - 입력</td>
+        <td>BbsModifyControllor</td>
+        <td>/WEB-INF/Views/bbs/modify.jsp</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>수정 - 처리</td>
+        <td>BbsModifyControllor</td>
+        <td>Redirect</td>
+        <td>POST</td>
+      </tr>
+      <tr>
+        <td>삭제</td>
+        <td>BbsDeleteControllor</td>
+        <td>Redirect</td>
+        <td>GET/POST</td>
+      </tr>
+    </table>
+  </body>
+</html>
