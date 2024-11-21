@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>SpringBoot</h1>
+
+    <p>Auto configuration (자동설정) 사용</p>
+    <p>라이브러리가 설치되어 있으면, 자기가 설정을 진행</p>
+    <p>내장 톰캣 사용</p>
+    <p>단독 실행 가능한 도구</p>
+    <p>스프링의 코드나 개념이 그대로 유지</p>
+    <p>설정 관련 build.gradle 에 추가 단순하게 처리 및 변경</p>
+    <p>빈(bean) 설정이 xml 대신 자바 설정 사용</p>
+    <p>스프링 -> jsp, 부트 -> Thymeleaf 사용</p>
+    <p>주로 API 서버로 사용</p>
+
+    https://start.spring.io/
+
+    <div>3.2.11</div>
+
+    <h2>Spring JPA</h2>
+    <ul>
+      <li>JPA (Java Persistence API)</li>
+      <li>자바로 영속 영역을 처리하는 API</li>
+      <li>Spring Data JPA 라이브러리 사용</li>
+      <li>
+        ORM(Object Relational Mapping)
+        <ul>
+          <li>객체지향으로 구성한 오브젝트를 관계형 DB에 매핑하는 개념</li>
+        </ul>
+      </li>
+      <li>
+        JPA Repository
+        <ul>
+          <li>객체지향을 통해서 영속 계층 처리</li>
+          <li>엔티티 객체 -> 데이터(VO/DTO) -> JPA -> 데이터베이스 연동</li>
+          <li>
+            Spring Data JPA
+            <ul>
+              <li>엔티티 객체를 이용 -> JPA를 사용하기 위한 라이브러리 제공</li>
+              <li>자동으로 객체 생성, 처리 -> JpaRepository</li>
+            </ul>
+          </li>
+          <li>
+            엔티티 객체(클래스) &lt;- VO, DTO와 비슷함
+            <ul>
+              <li>해당 클래스명으로 테이블이 생성</li>
+              <li>PK 기본키를 가지는 자바 객체</li>
+              <li>@id 객체 구분 처리</li>
+              <li>수정 안하는 것이 권장</li>
+              <li>해당 클래스명으로 된 테이블이 존재하지 않으면 생성</li>
+              <li>@Entity 필수</li>
+              <li>
+                키 생성 전략(Key generation strategy)
+                <ul>
+                  <li>GenerationType.IDENTITY -> 데이터베이스에서 자동 생성</li>
+                  <li>
+                    GenerationType.IDENTITY -> 데이터베이스에 위임하여 생성
+                    <ul>
+                      <li>MariaDB, MySQL, MSSQL -> auto_increment</li>
+                      <li>Oracle -> sequence -> @SequenceGenerator</li>
+                    </ul>
+                  </li>
+                  <li>
+                    TABLE : 키 생성용 테이블 사용, 모든 DB에서 사용 ->
+                    @TableGenerator 필요
+                  </li>
+                  <li>AUTO : DBMS에 따라서 자동 지정, 기본값</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>JpaRepository 인터페이스 사용</li>
+          <li>
+            Spring Data JPA 사용
+            <ul>
+              <li>JpaRepository 인터페이스 선언</li>
+              <li>-> 대략적인 DB 관련 처리 가능</li>
+              <li>-> MyBatis 매퍼 인터페이스와 유사한 기능</li>
+            </ul>
+          </li>
+          <li>엔티티 타입, @id 타입 지정 필수</li>
+          <li>
+            확장에 대한 이슈
+            <ul>
+              <li>쿼리 메서드 기능(메서드명 자체가 쿼리가 되는 기능)</li>
+              <li>Querydsl 이용(거의 안씀)</li>
+            </ul>
+          </li>
+          <li>클래스명(엔티티명)</li>
+          <li>
+            insert/update
+            <ul>
+              <li>save(객체명)</li>
+            </ul>
+          </li>
+          <li>
+            select
+            <ul>
+              <li>findBy(ID)</li>
+            </ul>
+          </li>
+          <li>
+            delete
+            <ul>
+              <li>deleteBy(ID)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        페이지 처리
+        <ul>
+          <li>Pageable 사용</li>
+          <li>인터페이스</li>
+          <li>
+            Pageable 객체를 파라미터로 사용
+            <ul>
+              <li>PageRequest.of(페이지 번호, 사이즈)</li>
+              <li>PageRequest.of(페이지 번호, 사이즈, sort)</li>
+              <li>PageRequest.of(페이지 번호, 사이즈, sort, direction 속성)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>JPQL(Java Persistence Query Language)</li>
+      <li>@Query 로 value로 쿼리 작성</li>
+      <li>
+        JPA에서 사용하는 쿼리 언어
+        <ul>
+          <li>데이터베이스와 독립적으로 사용 가능</li>
+          <li>JPQL 이용</li>
+        </ul>
+      </li>
+      <li>테이블 대신 엔티티 타입을 이용, 컬럼 대신 엔티티 속성을 이용</li>
+      <li>SQL을 대신하는 용도</li>
+      <li>
+        조인과 같이 복잡한 쿼리 실행 가능
+        <ul>
+          <li>
+            @Query("SELECT B FROM tbl_bbs AS B WHERE B.title LIKE concat("%",
+            aaa, "%")")<br />
+            Page&lt;Board&gt; findKeywords(String k, Pageable p)
+          </li>
+        </ul>
+      </li>
+      <li>
+        nativeQuery = true 특정 데이터베이스에서 동작하는 쿼리 사용 가능
+        <ul>
+          <li>fetch() -> 쿼리 실행</li>
+          <li>
+            단점
+            <ul>
+              <li>어노테이션을 사용하므로 제약이 존재, 쿼리가 고정된 형태</li>
+              <li>컬럼을 동적으로 검색하기 어렵다</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Querydsl 이용</li>
+    </ul>
+    <script src="script.js"></script>
+  </body>
+</html>

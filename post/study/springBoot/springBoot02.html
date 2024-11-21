@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Thymeleaf 문법 예제</title>
+  </head>
+  <body>
+    <!-- 1. 기본 표현식 -->
+    <h2 th:text="${name}">이름</h2>
+    <p th:text="#{welcome.message}">환영 메시지</p>
+    <p th:text="*{name}">폼 데이터</p>
+    <a th:href="@{/home}">홈 링크</a>
+    <div th:replace="~{header}">헤더 포함</div>
+
+    <!-- 2. 속성 설정 -->
+    <p th:text="${name}">텍스트 렌더링</p>
+    <div th:utext="${htmlContent}">HTML 컨텐츠</div>
+    <a th:href="@{/home}">링크 설정</a>
+    <img th:src="@{/images/logo.png}" alt="로고 이미지" />
+    <div th:attr="title=${title}, id=${id}">속성 설정</div>
+
+    <!-- 3. 조건부 렌더링 -->
+    <p th:if="${user.isLoggedIn}">로그인 사용자에게 보이는 메시지</p>
+    <p th:unless="${user.isLoggedIn}">비로그인 사용자에게 보이는 메시지</p>
+
+    <!-- 4. 반복 처리 -->
+    <ul>
+      <li th:each="item : ${items}" th:text="${item}">아이템</li>
+    </ul>
+    <ul>
+      <li
+        th:each="item, iterStat : ${items}"
+        th:text="${iterStat.index} + ' ' + ${item}"
+      >
+        상태 변수 사용
+      </li>
+    </ul>
+
+    <!-- 5. Fragment 포함 -->
+    <div th:insert="~{fragments/footer}">푸터 포함</div>
+    <div th:replace="~{fragments/header}">헤더 교체</div>
+    <div th:include="~{fragments/body}">바디 포함</div>
+
+    <!-- 6. 폼 처리 -->
+    <form th:object="${user}">
+      <input type="text" th:field="*{username}" placeholder="사용자 이름" />
+    </form>
+
+    <!-- 7. Switch/Case -->
+    <div th:switch="${status}">
+      <p th:case="'ACTIVE'">활성 사용자</p>
+      <p th:case="'INACTIVE'">비활성 사용자</p>
+      <p th:case="*">알 수 없는 상태</p>
+    </div>
+
+    <!-- 8. JavaScript 인라인 -->
+    <script th:inline="javascript">
+      var userName = [[${user.name}]];
+      var isLoggedIn = [[${user.isLoggedIn}]];
+    </script>
+
+    <!-- 9. 반복 처리 상태 변수 -->
+    <table>
+      <tr th:each="item, iterStat : ${items}">
+        <td th:text="${iterStat.index}">인덱스</td>
+        <td th:text="${item.name}">아이템 이름</td>
+      </tr>
+    </table>
+
+    <!-- 10. 템플릿 상속 -->
+    <div th:replace="~{header}"></div>
+    <div th:replace="~{content}"></div>
+    <div th:replace="~{footer}"></div>
+  </body>
+</html>
