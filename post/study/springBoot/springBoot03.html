@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Rest 방식 서비스</h1>
+
+    <ul>
+      <li>클라이언트 중심</li>
+      <li>
+        JSON 문자열
+        <ul>
+          <li>키/값</li>
+        </ul>
+      </li>
+      <li>
+        REST 방식
+        <ul>
+          <li>데이터를 전송하고 결과를 확인하는 방식</li>
+          <li>효율적이고 안정적</li>
+          <li>
+            확장 가능한 분산 시스템을 설꼐 개발할 수 있는 소프트웨어
+            아키텍처들의 모임
+          </li>
+          <li>REST 방식의 제약 사항을 준수하는 개발을 -RESTful하다- 표현.</li>
+        </ul>
+      </li>
+      <li>
+        개발 URL 설계
+        <ul>
+          <li>
+            기존 ex)
+            <ul>
+              <li>/board/list</li>
+              <li>/board/view?idx=xxx</li>
+              <li>/board/update?idx=xxx</li>
+              <li>/board/delete?idx=xxx</li>
+            </ul>
+          </li>
+          <li>
+            REST 방식 ex)
+            <ul>
+              <li>/board GET방식</li>
+              <li>/board POST방식</li>
+              <li>/board PUT방식</li>
+              <li>/board DELETE방식</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>URL</th>
+          <th>Method</th>
+          <th>설명</th>
+          <th>변환 데이터</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>/reply/regist</td>
+          <td>POST</td>
+          <td>특정 게시글의 댓글 추가</td>
+          <td>생성된 글의 idx</td>
+        </tr>
+        <tr>
+          <td>/reply/list/idx/page</td>
+          <td>GET</td>
+          <td>게시글의 목록</td>
+          <td>DTO를 JSON 처리</td>
+        </tr>
+        <tr>
+          <td>/reply/view/idx</td>
+          <td>GET</td>
+          <td>댓글 내용 조회</td>
+          <td>댓글 객체를 JSON 변환</td>
+        </tr>
+        <tr>
+          <td>/reply/modify/idx</td>
+          <td>PUT</td>
+          <td>댓글 수정</td>
+          <td>수정된 댓글 번호</td>
+        </tr>
+        <tr>
+          <td>/reply/delete/idx</td>
+          <td>DELETE</td>
+          <td>댓글 삭제</td>
+          <td>삭제된 댓글 번호</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ul>
+      <li>JPA는 연관 관계의 방향성 결정이 어렵다.</li>
+      <li>변화가 많은 쪽을 기준으로 연관 관계를 설정</li>
+      <li>ERD의 FK 기준으로 설정</li>
+    </ul>
+
+    <ul>
+      <li>
+        단방향
+        <ul>
+          <li>한쪽만 참조를 유지</li>
+          <li>객체 A가 B를 참조</li>
+          <li>객체 B가 A를 참조</li>
+          <li>구현 단순, 에러 발생 가능성 감소</li>
+          <li>다른 쪽에 있는 엔티티 객체의 내용 사용이 어려워짐</li>
+        </ul>
+      </li>
+      <li>
+        양방향
+        <ul>
+          <li>양쪽 모두 참조를 하는 방식</li>
+          <li>관리를 양쪽 객체에 동일하게 적용</li>
+          <li></li>
+        </ul>
+      </li>
+    </ul>
+  </body>
+</html>

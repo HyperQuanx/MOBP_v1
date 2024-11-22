@@ -53,10 +53,12 @@
     </div>
 
     <!-- 8. JavaScript 인라인 -->
-    <script th:inline="javascript">
-      var userName = [[${user.name}]];
-      var isLoggedIn = [[${user.isLoggedIn}]];
-    </script>
+    <textarea>
+        <!-- <script th:inline="javascript">
+          var userName = [[${user.name}]];
+          var isLoggedIn = [[${user.isLoggedIn}]];
+        </script> -->
+    </textarea>
 
     <!-- 9. 반복 처리 상태 변수 -->
     <table>
