@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue.js 설명</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+        padding: 0;
+      }
+      h1,
+      h2 {
+        color: #333;
+      }
+      ul {
+        list-style-type: disc;
+        margin: 10px 20px;
+      }
+      li {
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Vue.js 설명</h1>
+
+    <h2>1. 뷰</h2>
+    <ul>
+      <li>Front-end framework</li>
+      <li>UI 구현 라이브러리</li>
+      <li>M V V M (Model-View-ViewModel) 패턴 사용</li>
+      <li>컴포넌트 기반의 프레임워크</li>
+    </ul>
+
+    <h3>뷰 인스턴스</h3>
+    <ul>
+      <li>
+        <code>Vue.createApp()</code> 메소드를 호출하여 만들어진 객체 →
+        Application Instance
+      </li>
+      <li>
+        Vue Application
+        <ul>
+          <li>Vue Component 집합으로 구성</li>
+          <li>Vue Instance가 기본 단위</li>
+          <li>Vue Application의 한 부분으로 동작</li>
+        </ul>
+      </li>
+      <li>
+        Vue Component의 기본 단위
+        <ul>
+          <li>Vue Application의 한 부분으로 동작</li>
+          <li>데이터, 메소드, 생명주기, 훅 등의 옵션 포함</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Application 인스턴스</h3>
+    <ul>
+      <li>Vue 3.x에서 도입</li>
+      <li>Application의 Root를 의미</li>
+      <li>Vue Application의 전역 설정</li>
+      <li>
+        mount()메소드를 이용하여DOM tree 에 마운트 시킴
+        <ul>
+          <li>Root Component Instance를 리턴</li>
+        </ul>
+      </li>
+
+      <li>option 객체 사용 : 생성 시 전달하는 속성들을 담은 객체</li>
+    </ul>
+
+    <h2>2. data 옵션</h2>
+    <ul>
+      <li>Option 객체의 data 함수</li>
+      <li>Component가 관리하고 추적할 데이터 등록 시에 사용</li>
+      <li>데이터 변경, 탐지, 화면 갱신 역할 수행</li>
+      <li>반드시 객체를 리턴하는 함수여야 함</li>
+      <li>Vue 2.xx에서는 직접 객체 지정 가능</li>
+      <li>Vue 2.xx에서는 함수가 사용되도록 변경</li>
+      <li>
+        Component instance가 생성되고, 관찰이 시작되면 반응성 속성 추가가 불가능
+      </li>
+      <li>반응성을 가져야 할 데이터는 미리 속성으로 추가해야 함</li>
+    </ul>
+
+    <h2>3. computed 속성</h2>
+    <ul>
+      <li>data나 속성이 변경될 때 함수가 실행되어 저장된 캐싱 값</li>
+      <li>항수는 속성 또는 data 변경 시 한 번 호출됨</li>
+      <li>데이터를 기반으로 다른 데이터를 변경할 필요가 있을 때 주로 사용</li>
+    </ul>
+
+    <h2>4. method</h2>
+    <ul>
+      <li>Vue Instance 에서 사용할 메서드를 등록하는 옵션</li>
+      <li>Vue Instance 이용하여 직접 호출이 가능</li>
+      <li>
+        directive 나 코수염문법(mustache syntax) 사용 가능, 이벤트 핸들러로 이용
+        가능
+      </li>
+      <li>
+        메서드 작성 시 화살표 함수로 메서드를 등록하면 Component instance의
+        this에 접근할 수 없음
+      </li>
+      <li>
+        메서드가 Component instance에 접근해야 하면 반드시 전통적인 자바스크립트
+        함수로 구현해야 함
+      </li>
+    </ul>
+
+    <h2>5. watch property(관찰 속성)</h2>
+    <ul>
+      <li>데이터를 기반으로 다른 데이터를 변경할 필요가 있을 때 주로 사용</li>
+      <li>일반적으로 긴 처리 시간이 필요한 비동기 처리에 적합</li>
+      <li>복잡도 증가, 디버깅 어려워 질 수 있음 -> 가급적 사용x</li>
+      <li>
+        참조형 자료 사용할 때 주의 필요함
+        <ul>
+          <li>values 객체 참조형 자료</li>
+          <li>내부변경돼도 참조형 자료의 값 변경되지 않음</li>
+          <li>
+            객체 -> 주소값 참조 -> 객체의 주소는 변하지 않음 -> 값의 변경이 없다
+            -> 동작하지 않음
+          </li>
+          <li>깊은 비교(deep compare) 수행하여 해결</li>
+          <li>deep:true 옵션 사용하여 하위 값의 변경을 탐지</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>6. 생명주기 method</h2>
+    <ul>
+      <li>
+        복잡한 비동기 처리, 상태관리, 라우팅 기능 등의 복잡한 프로세스가
+        사용되므로 생명주기에 대한 이해가 필요
+      </li>
+      <li>
+        Component 가 생성된 후부터 Component가 app Component에서 제거될 때까지의
+        흐름
+      </li>
+      <li>각 생명주기마다 실행할 수 있는 event hook 등록 가능</li>
+      <li>created, mounted, updated, unmounted 등이 주로 사용됨</li>
+      <li>Component 단위로 설정 가능</li>
+      <li>
+        created : 화면과 관련되징 ㅏㄶ은 외부 리소스 연결, 이벤트 초기화 등의
+        작업을 진행
+      </li>
+      <li>mounted : 화면 초기화 작업 진행</li>
+      <li>
+        updated : 데이터나, 속성이 변경되어 re-rendering이 일어난 후에 DOM
+        관련된 기능을 수행할 때 사용
+      </li>
+      <li>unmounted : 외부 리소스의 연결과 같은 객체를 해제할 때 사용</li>
+    </ul>
+
+    <h2>7. 컴포넌트(Vue Component)</h2>
+    <ul>
+      <li>
+        조합하여 화면을 구성할 수 있는 화면의 특정 영역을 가리키는 블럭을 의미
+      </li>
+      <li>화면을 빠르게 구조화하여, 일괄적인 패턴으로 개발가능</li>
+      <li>화면의 영역을 컴포넌트로 쪼개서 재활용할 수 있는 형태로 관리 가능</li>
+      <li>코드의 재사용성을 증가</li>
+      <li>
+        네비게이션 바, 테이블, 리스트, 인풋 상자, 푸터 등과 같이 화면을 잘게
+        쪼개서 컴포넌트로 관리
+      </li>
+
+      <li>
+        전역 컴포넌트 등록
+        <ul>
+          <li>Application Instance 를 이용하여 등록</li>
+          <li>
+            Application Instance 가 가지고 있는 component() 를 호출하여 수행
+          </li>
+          <li>
+            컴포넌트 이름으로 등록
+            <ul>
+              <li>
+                template 속성에서 사용할 수 있는 HTML 사용자 정의 태그 이름을
+                의미
+              </li>
+              <li>케밥 스타일로 지정 추천</li>
+              <li>HTML 템플릿에서 그대로 이름 사용이 가능</li>
+              <li>단어를 소문자로 작성하고, 단어 사이를 하이픈으로 연결</li>
+              <li>HTML 템플릿 안에서 컴포넌트 사용 시 주로 사용</li>
+              <li>&lt;kebab-fruits-list&gt;&lt;/kebab-fruits-list&gt;</li>
+            </ul>
+          </li>
+          <li>
+            파스칼 케이스로 명명(3.xx 이후 버전)
+            <ul>
+              <li>HTML 템플릿에서 케밥, 파스칼 모두 사용 가능</li>
+              <li>
+                실제 찾는 컴포넌트 이름 소문자로 되어 있는 컴포넌트를 찾음
+              </li>
+              <li>3.xx 이후 모두 정상 동작하도록 변경</li>
+              <li>
+                MyComponent.vue
+                <ul>
+                  <li>&lt;pascal-fruits-list&gt;&lt;/pascal-fruits-list&gt;</li>
+                  <li>&lt;MyComponent&gt;&lt;/MyComponent&gt;</li>
+                </ul>
+              </li>
+              <li>
+                컴포넌트 태그가 실제 화면의 HTML 요소로 변환될 때 표시될 속성
+                내용들을 포함
+              </li>
+              <li>template, data, methods 등의 인스턴스 옵션 속성 값을 정의</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>8. 지역 컴포넌트</h2>
+    <ul>
+      <li>특정 인스턴스 안에서만 유효한 범위를 가짐</li>
+      <li>지역 컴포넌트는 특정 범위 내에서만 사용 가능</li>
+      <li>케밥 스타일로 지정 추천</li>
+      <li>HTML 템플릿에서 그대로 이름 사용 가능</li>
+      <li>단어를 소문자로 작성하고 단어 사이를 하이픈으로 연결</li>
+      <li>template, data, methods 등의 인스턴스 옵션 속성 값을 정의</li>
+    </ul>
+
+    <h2>9. 컴포넌트(Vue Component) 간의 통신</h2>
+    <ul>
+      <li>Component 화면으로 구성</li>
+      <li>
+        Component 자체적으로 scope 보유
+        <ul>
+          <li>같은 웹 페이지간의 Component 라도 데이터 공유가 불가</li>
+        </ul>
+      </li>
+      <li>
+        상, 하위 컴포넌트 관계일 경우
+        <ul>
+          <li>기본적인 데이터 전달 방식 부모 -> 자식 컴포넌트간 전달</li>
+          <li>
+            인스턴스가 지역 혹은 전역 컴포넌트를 등록하면 하위 컴포넌트로 동작
+          </li>
+          <li>데이터 전달은 props 이용</li>
+        </ul>
+      </li>
+      <li>하위에서 상위 컴포넌트로 이벤트 전달</li>
+      <li>
+        event 를 emit 시켜서 상위 컴포넌트에 전달
+        <ul>
+          <li>
+            상위 컴포넌트에서 하위 컴포넌트의 특정 이벤트가 발생하는지 대기
+          </li>
+          <li>이벤트 수신 시에 상위 컴포넌트의 메소드를 호출</li>
+        </ul>
+      </li>
+      <li>
+        이벤트 발생과 수신
+        <ul>
+          <li>발생 : $emit() 이용</li>
+          <li>수신 : v-on 속성 이용</li>
+        </ul>
+      </li>
+    </ul>
+  </body>
+</html>
